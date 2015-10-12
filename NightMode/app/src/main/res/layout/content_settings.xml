@@ -232,6 +232,34 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
+            android:id="@+id/action_alarm_level">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_alarm_level_preferences"
+                android:id="@+id/alarm_level_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/alarm_level_subtitle"
+                android:text="@string/subtitle_alarm_level_preferences"
+                android:layout_below="@+id/alarm_level_title" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
             android:id="@+id/action_silent">
             <TextView
                 android:layout_width="match_parent"

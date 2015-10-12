@@ -1,15 +1,19 @@
 package com.nego.nightmode;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class Settings extends AppCompatActivity {
@@ -94,6 +98,38 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 aC.setChecked(!aC.isChecked());
+            }
+        });
+
+        // ALARM LEVEL
+        final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        findViewById(R.id.action_alarm_level).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View dialogView = LayoutInflater.from(Settings.this).inflate(R.layout.dialog_slider, null);
+                final Dialog dialog_slider = new Dialog(Settings.this, R.style.mDialog);
+                SeekBar slider = (SeekBar) dialogView.findViewById(R.id.slider);
+                slider.setMax(am.getStreamMaxVolume(AudioManager.STREAM_ALARM));
+                slider.setProgress(SP.getInt(Costants.PREFERENCES_ALARM_SOUND_LEVEL, 5));
+                slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        SP.edit().putInt(Costants.PREFERENCES_ALARM_SOUND_LEVEL, seekBar.getProgress()).apply();
+                        dialog_slider.dismiss();
+                    }
+                });
+                dialog_slider.setContentView(dialogView);
+                dialog_slider.show();
             }
         });
 

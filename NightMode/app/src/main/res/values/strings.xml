@@ -112,4 +112,7 @@
     <string name="title_sections_toggle_preferences">Toggle Preferences</string>
     <string name="title_remember_old_preferences">Toggle Status</string>
     <string name="subtitle_remember_old_preferences">Remember old toggle status</string>
+    <string name="title_alarm_level_preferences">Alarm Level</string>
+    <string name="subtitle_alarm_level_preferences">Chosse alarm level when night mode is on</string>
+    <string name="action_save">Save</string>
 </resources>
