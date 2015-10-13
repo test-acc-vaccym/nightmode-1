@@ -115,4 +115,8 @@
     <string name="title_alarm_level_preferences">Alarm Level</string>
     <string name="subtitle_alarm_level_preferences">Chosse alarm level when night mode is on</string>
     <string name="action_save">Save</string>
+    <string name="title_choose_toggle_preferences">Choose night mode toggles</string>
+    <string name="subtitle_choose_toggle_preferences">Choose what to deactivate on night mode</string>
+    <string name="title_notification_preferences">Night mode off notification</string>
+    <string name="subtitle_notification_preferences">Show a notification when night mode is on to turn off that</string>
 </resources>

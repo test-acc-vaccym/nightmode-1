@@ -1,6 +1,7 @@
 package com.nego.nightmode;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import com.nego.nightmode.Functions.NotificationF;
@@ -50,7 +51,8 @@ public class Utils {
     }*/
 
     public static void showNotification(Context context, boolean activated) {
-        if (activated) {
+        SharedPreferences SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
+        if (activated && SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true)) {
             NotificationF.NotificationAdd(context);
         } else {
             NotificationF.CancelAllNotification(context);

@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class Settings extends AppCompatActivity {
 
     SharedPreferences SP;
+    boolean menu = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +165,44 @@ public class Settings extends AppCompatActivity {
                 oC.setChecked(!oC.isChecked());
             }
         });
+
+        // NOTIFICATION
+        final CheckBox notC = (CheckBox) findViewById(R.id.notification_check);
+        notC.setChecked(SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true));
+        notC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SP.edit().putBoolean(Costants.PREFERENCES_NOTIFICATION, isChecked).apply();
+            }
+        });
+        findViewById(R.id.action_notification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notC.setChecked(!notC.isChecked());
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (menu) {
+            showMenu("");
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void showMenu(String what) {
+        switch (what) {
+            case "toogle":
+                menu = true;
+                // TODO: mettere le visibility dei vari menu
+            default:
+                menu = false;
+                // TODO: ripristinare le visibility dei vari menu
+                break;
+
+        }
     }
 
 }

@@ -22,6 +22,158 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary"
+                android:text="@string/title_sections_preferences"
+                android:fontFamily="sans-serif-medium"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_remember_old">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_remember_old_preferences"
+                android:id="@+id/remember_old_title"
+                android:layout_toLeftOf="@+id/remember_old_check"
+                android:layout_toStartOf="@+id/remember_old_check" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/remember_old_subtitle"
+                android:text="@string/subtitle_remember_old_preferences"
+                android:layout_below="@+id/remember_old_title"
+                android:layout_toLeftOf="@+id/remember_old_check"
+                android:layout_toStartOf="@+id/remember_old_check" />
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/remember_old_check"
+                android:checked="true"
+                android:theme="@style/mDialog"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_choose_toggle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_choose_toggle_preferences"
+                android:id="@+id/choose_toggle_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/choose_toggle_subtitle"
+                android:text="@string/subtitle_choose_toggle_preferences"
+                android:layout_below="@+id/choose_toggle_title" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_notification">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_notification_preferences"
+                android:id="@+id/notification_title"
+                android:layout_toLeftOf="@+id/notification_check"
+                android:layout_toStartOf="@+id/notification_check" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/notification_subtitle"
+                android:text="@string/subtitle_notification_preferences"
+                android:layout_below="@+id/notification_title"
+                android:layout_toLeftOf="@+id/notification_check"
+                android:layout_toStartOf="@+id/notification_check" />
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/notification_check"
+                android:checked="true"
+                android:theme="@style/mDialog"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary"
+                android:text="@string/title_sections_style"
+                android:fontFamily="sans-serif-medium"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_widget_style">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_choose_toggle_preferences"
+                android:id="@+id/widget_style_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/widget_style_subtitle"
+                android:text="@string/subtitle_choose_toggle_preferences"
+                android:layout_below="@+id/widget_style_title" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/title_sections_toggle_preferences"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
@@ -290,74 +442,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary"
-                android:text="@string/title_sections_preferences"
-                android:fontFamily="sans-serif-medium"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_remember_old">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_remember_old_preferences"
-                android:id="@+id/remember_old_title"
-                android:layout_toLeftOf="@+id/remember_old_check"
-                android:layout_toStartOf="@+id/remember_old_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/remember_old_subtitle"
-                android:text="@string/subtitle_remember_old_preferences"
-                android:layout_below="@+id/remember_old_title"
-                android:layout_toLeftOf="@+id/remember_old_check"
-                android:layout_toStartOf="@+id/remember_old_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/remember_old_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary"
-                android:text="@string/title_sections_style"
-                android:fontFamily="sans-serif-medium"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
         </RelativeLayout>
 
     </LinearLayout>
