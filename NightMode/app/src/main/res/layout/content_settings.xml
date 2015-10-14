@@ -33,6 +33,29 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
+            android:id="@+id/action_choose_toggle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_choose_toggle_preferences"
+                android:id="@+id/choose_toggle_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/choose_toggle_subtitle"
+                android:text="@string/subtitle_choose_toggle_preferences"
+                android:layout_below="@+id/choose_toggle_title" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
             android:id="@+id/action_remember_old">
             <TextView
                 android:layout_width="match_parent"
@@ -63,29 +86,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_choose_toggle">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_choose_toggle_preferences"
-                android:id="@+id/choose_toggle_title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/choose_toggle_subtitle"
-                android:text="@string/subtitle_choose_toggle_preferences"
-                android:layout_below="@+id/choose_toggle_title" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -162,286 +162,6 @@
                 android:id="@+id/widget_style_subtitle"
                 android:text="@string/subtitle_choose_toggle_preferences"
                 android:layout_below="@+id/widget_style_title" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/title_sections_toggle_preferences"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_wifi">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_wifi_preferences"
-                android:id="@+id/wifi_title"
-                android:layout_toLeftOf="@+id/wifi_check"
-                android:layout_toStartOf="@+id/wifi_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/wifi_subtitle"
-                android:text="@string/subtitle_wifi_preferences"
-                android:layout_below="@+id/wifi_title"
-                android:layout_toLeftOf="@+id/wifi_check"
-                android:layout_toStartOf="@+id/wifi_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wifi_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_bluetooth">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_bluetooth_preferences"
-                android:id="@+id/bluetooth_title"
-                android:layout_toLeftOf="@+id/bluetooth_check"
-                android:layout_toStartOf="@+id/bluetooth_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/bluetooth_subtitle"
-                android:text="@string/subtitle_bluetooth_preferences"
-                android:layout_below="@+id/bluetooth_title"
-                android:layout_toLeftOf="@+id/bluetooth_check"
-                android:layout_toStartOf="@+id/bluetooth_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bluetooth_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_brightness">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_brightness_preferences"
-                android:id="@+id/brightness_title"
-                android:layout_toLeftOf="@+id/brightness_check"
-                android:layout_toStartOf="@+id/brightness_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/brightness_subtitle"
-                android:text="@string/subtitle_brightness_preferences"
-                android:layout_below="@+id/brightness_title"
-                android:layout_toLeftOf="@+id/brightness_check"
-                android:layout_toStartOf="@+id/brightness_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/brightness_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_brightness_level">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_brightness_level_preferences"
-                android:id="@+id/brightness_level_title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/brightness_level_subtitle"
-                android:text="@string/subtitle_brightness_level_preferences"
-                android:layout_below="@+id/brightness_level_title" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_alarm">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_alarm_preferences"
-                android:id="@+id/alarm_title"
-                android:layout_toLeftOf="@+id/alarm_check"
-                android:layout_toStartOf="@+id/alarm_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/alarm_subtitle"
-                android:text="@string/subtitle_alarm_preferences"
-                android:layout_below="@+id/alarm_title"
-                android:layout_toLeftOf="@+id/alarm_check"
-                android:layout_toStartOf="@+id/alarm_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/alarm_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_alarm_level">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_alarm_level_preferences"
-                android:id="@+id/alarm_level_title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/alarm_level_subtitle"
-                android:text="@string/subtitle_alarm_level_preferences"
-                android:layout_below="@+id/alarm_level_title" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_silent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_silent_preferences"
-                android:id="@+id/silent_title"
-                android:layout_toLeftOf="@+id/silent_check"
-                android:layout_toStartOf="@+id/silent_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/silent_subtitle"
-                android:text="@string/subtitle_silent_preferences"
-                android:layout_below="@+id/silent_title"
-                android:layout_toLeftOf="@+id/silent_check"
-                android:layout_toStartOf="@+id/silent_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/silent_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
         </RelativeLayout>
 
     </LinearLayout>

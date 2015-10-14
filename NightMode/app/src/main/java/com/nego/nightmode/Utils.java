@@ -6,6 +6,10 @@ import android.os.Build;
 
 import com.nego.nightmode.Functions.NotificationF;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class Utils {
 
@@ -56,6 +60,29 @@ public class Utils {
             NotificationF.NotificationAdd(context);
         } else {
             NotificationF.CancelAllNotification(context);
+        }
+    }
+
+
+    public static String getDate(Context context, long date) {
+        if (date == 0) {
+            return context.getString(R.string.text_never);
+        } else {
+            Calendar today = Calendar.getInstance();
+            Calendar byR = Calendar.getInstance();
+            byR.setTimeInMillis(date);
+            SimpleDateFormat HM = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat DM = new SimpleDateFormat("MMM d, HH:mm");
+            SimpleDateFormat MY = new SimpleDateFormat("MMM d y, HH:mm ");
+            if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR) &&
+                    today.get(Calendar.MONTH) == byR.get(Calendar.MONTH) &&
+                    today.get(Calendar.DAY_OF_MONTH) == byR.get(Calendar.DAY_OF_MONTH)) {
+                return HM.format(new Date(byR.getTimeInMillis()));
+            } else if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR)) {
+                return DM.format(new Date(byR.getTimeInMillis()));
+            } else {
+                return MY.format(new Date(byR.getTimeInMillis()));
+            }
         }
     }
 

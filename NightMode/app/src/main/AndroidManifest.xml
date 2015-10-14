@@ -37,6 +37,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
         </activity>
+        <activity
+            android:name=".ToggleSettings"
+            android:label="@string/title_sections_toggle_preferences"
+            android:parentActivityName=".Settings"
+            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nego.nightmode.Settings" />
+        </activity>
         <service
             android:name=".Functions.NMToggle"
             android:exported="false" >

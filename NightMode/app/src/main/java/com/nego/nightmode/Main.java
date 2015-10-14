@@ -22,14 +22,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nego.nightmode.Functions.NMToggle;
 
 public class Main extends AppCompatActivity {
 
-    private FloatingActionButton button;
+    private ImageView button;
     private SharedPreferences SP;
     private BroadcastReceiver mReceiver;
+    private TextView ui_enabled;
+    private TextView ui_start_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,10 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        button = (FloatingActionButton) findViewById(R.id.fab);
+        setTitle("");
+        button = (ImageView) findViewById(R.id.button_center);
+        ui_enabled = (TextView) findViewById(R.id.app_isenabled);
+        ui_start_time = (TextView) findViewById(R.id.start_time);
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
 
@@ -99,8 +105,12 @@ public class Main extends AppCompatActivity {
     }
 
     public void updateUI(boolean activated) {
+        button.animate().scaleX(0).scaleY(0).start();
         button.setSelected(activated);
-        button.setImageResource(activated ? R.drawable.ic_action_night_mode_on : R.drawable.ic_action_sunny);
+        button.setImageResource(activated ? R.drawable.ic_action_night_mode_on : R.drawable.ic_action_device_brightness_low);
+        button.animate().scaleX(1).scaleY(1).start();
+        ui_enabled.setText(activated ? R.string.app_name_enabled : R.string.app_name_disabled);
+        ui_start_time.setText(getString(activated ? R.string.start_time_enabled : R.string.start_time_disabled, Utils.getDate(this, SP.getLong(Costants.PREFERENCES_START_TIME, 0))));
     }
 
     public void switchNightMode(boolean activated) {

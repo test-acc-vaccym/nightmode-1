@@ -119,4 +119,7 @@
     <string name="subtitle_choose_toggle_preferences">Choose what to deactivate on night mode</string>
     <string name="title_notification_preferences">Night mode off notification</string>
     <string name="subtitle_notification_preferences">Show a notification when night mode is on to turn off that</string>
+    <string name="start_time_disabled">Activated last time %s</string>
+    <string name="start_time_enabled">Activated %s</string>
+    <string name="text_never">never</string>
 </resources>

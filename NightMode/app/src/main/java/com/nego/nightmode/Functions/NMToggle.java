@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.R;
 import com.nego.nightmode.Utils;
+
+import java.util.Calendar;
 
 public class NMToggle extends IntentService {
 
@@ -95,6 +99,9 @@ public class NMToggle extends IntentService {
                     if (on) {
                         SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        // TODO
+                        /*NotificationListenerService service = new NotificationListenerService() {};
+                        service.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);*/
                     } else {
                         am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
                     }
@@ -107,6 +114,8 @@ public class NMToggle extends IntentService {
             }
 
             SP.edit().putBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, on).apply();
+            if (on)
+                SP.edit().putLong(Costants.PREFERENCES_START_TIME, Calendar.getInstance().getTimeInMillis()).apply();
             Utils.showNotification(this, on);
         }
     }
