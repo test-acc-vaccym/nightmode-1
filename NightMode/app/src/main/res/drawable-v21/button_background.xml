@@ -3,8 +3,9 @@
     <item>
         <ripple android:color="@color/ripple_light">
             <item>
-                <shape android:shape="oval">
-                    <solid android:color="@color/primary_soft" />
+                <shape>
+                    <solid android:color="@color/accent" />
+                    <corners android:radius="3dp" />
                 </shape>
             </item>
         </ripple>

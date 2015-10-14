@@ -8,7 +8,8 @@
 
     <color name="primary">#346ac2</color>
     <color name="primary_dark">#2a559b</color>
-    <color name="primary_light">#C5CAE9</color>
+    <color name="primary_light">#2196F3</color>
+    <color name="primary_soft">#4184f3</color>
     <color name="accent">@color/material_deep_teal_500</color>
     <color name="accent_dark">#607D8B</color>
     <color name="primary_text">#212121</color>

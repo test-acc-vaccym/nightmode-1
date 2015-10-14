@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_about" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.nego.nightmode.Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_choose_toggle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_choose_toggle_preferences"
+                android:id="@+id/choose_toggle_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/choose_toggle_subtitle"
+                android:text="@string/subtitle_choose_toggle_preferences"
+                android:layout_below="@+id/choose_toggle_title" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_remember_old">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_remember_old_preferences"
+                android:id="@+id/remember_old_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/remember_old_subtitle"
+                android:text="@string/subtitle_remember_old_preferences"
+                android:layout_below="@+id/remember_old_title" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@drawable/list_item_background_card"
+            android:clickable="true"
+            android:id="@+id/action_notification">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title_notification_preferences"
+                android:id="@+id/notification_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/notification_subtitle"
+                android:text="@string/subtitle_notification_preferences"
+                android:layout_below="@+id/notification_title" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

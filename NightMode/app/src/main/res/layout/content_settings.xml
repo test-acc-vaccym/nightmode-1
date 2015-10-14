@@ -50,6 +50,11 @@
                 android:layout_below="@+id/choose_toggle_title" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,6 +92,11 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"/>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -122,4 +122,9 @@
     <string name="start_time_disabled">Activated last time %s</string>
     <string name="start_time_enabled">Activated %s</string>
     <string name="text_never">never</string>
+    <string name="action_enable">Enable night mode</string>
+    <string name="action_disable">Disable night mode</string>
+    <string name="title_activity_about">About</string>
+    <string name="subtitle_about">App info, help and feedback</string>
+    <string name="subtitle_settings">Manage preferences and app settings</string>
 </resources>

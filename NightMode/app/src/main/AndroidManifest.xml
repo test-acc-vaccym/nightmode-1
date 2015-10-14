@@ -5,12 +5,10 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.NFC" />
-
-
 
     <application
         android:allowBackup="true"
@@ -46,6 +44,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Settings" />
         </activity>
+
         <service
             android:name=".Functions.NMToggle"
             android:exported="false" >
@@ -57,14 +56,12 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".Receiver.StatusChanged" >
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_NIGHT_MODE_OFF" />
                 <action android:name="android.intent.action.ACTION_NIGHT_MODE_ON" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".Receiver.AlarmReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.ALARM" />
@@ -74,14 +71,22 @@
         <activity
             android:name=".Receiver.ShortcutReceiver"
             android:label="@string/app_name"
-            android:theme="@style/MyDialog_theme">
+            android:theme="@style/MyDialog_theme" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".Main"
+            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nego.nightmode.Main" />
+        </activity>
     </application>
 
 </manifest>

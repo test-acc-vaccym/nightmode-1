@@ -3,12 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true" tools:context=".Main"
-    android:background="@color/back_selected_item">
+    android:layout_height="match_parent" tools:context=".Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rect_colored"
+        android:orientation="vertical"
+        android:background="@color/primary" />
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" app:elevation="2dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay" android:background="@color/primary"/>
+        android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
+        app:elevation="2dp" android:layout_marginTop="25dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,17 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.4"
-            android:orientation="vertical"
-            android:background="@color/primary">
+            android:orientation="vertical">
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:background="@drawable/circle"
-                android:padding="28dp"
-                android:elevation="4dp"
+                android:layout_width="256dp"
+                android:layout_height="256dp"
                 android:id="@+id/button_center"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_device_brightness_low"/>
+                android:src="@drawable/ic_night_day"/>
         </RelativeLayout>
 
         <LinearLayout

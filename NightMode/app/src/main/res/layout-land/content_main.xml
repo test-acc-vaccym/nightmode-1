@@ -8,13 +8,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rect_colored"
-        android:orientation="vertical"
-        android:background="@color/primary"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
         android:orientation="vertical"
@@ -58,24 +51,40 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="8dp"
                     android:clickable="true"
                     android:background="@drawable/list_item_background_card"
-                    android:id="@+id/action_wifi">
-                    <TextView
+                    android:id="@+id/action_settings">
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_action_action_settings"
+                        android:tint="@color/third_text"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/icon_one"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/primary_text"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/title_wifi_preferences"
-                        android:id="@+id/wifi_title" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/secondary_text"
-                        android:id="@+id/wifi_subtitle"
-                        android:text="@string/subtitle_wifi_preferences"
-                        android:layout_below="@+id/wifi_title" />
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/icon_one"
+                        android:layout_toEndOf="@+id/icon_one">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_text"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/title_activity_settings" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="@color/secondary_text"
+                            android:text="@string/subtitle_settings" />
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -86,55 +95,54 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="8dp"
                     android:background="@drawable/list_item_background_card"
                     android:clickable="true"
-                    android:id="@+id/action_bluetooth">
-                    <TextView
+                    android:id="@+id/action_about">
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_action_communication_message"
+                        android:tint="@color/third_text"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/icon_two"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/primary_text"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/title_bluetooth_preferences"
-                        android:id="@+id/bluetooth_title" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/secondary_text"
-                        android:id="@+id/bluetooth_subtitle"
-                        android:text="@string/subtitle_bluetooth_preferences"
-                        android:layout_below="@+id/bluetooth_title" />
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/icon_two"
+                        android:layout_toEndOf="@+id/icon_two">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_text"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/title_activity_about" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="@color/secondary_text"
+                            android:text="@string/subtitle_about" />
+                    </LinearLayout>
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/back_select"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="@drawable/list_item_background_card"
-                    android:clickable="true"
-                    android:id="@+id/action_alarm">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/primary_text"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/title_alarm_preferences"
-                        android:id="@+id/alarm_title" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/secondary_text"
-                        android:id="@+id/alarm_subtitle"
-                        android:text="@string/subtitle_alarm_preferences"
-                        android:layout_below="@+id/alarm_title" />
-                </RelativeLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@drawable/button_background"
+            android:id="@+id/button_title"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/action_enable"/>
     </LinearLayout>
 
 </RelativeLayout>
