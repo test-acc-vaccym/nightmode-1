@@ -25,6 +25,7 @@ public class Costants {
     public static final String PREFERENCES_DO_NOT_DISTURB_OLD = "PREFERENCES_DO_NOT_DISTURB_OLD";
     public static final String PREFERENCES_NOTIFICATION = "PREFERENCES_NOTIFICATION";
     public static final String PREFERENCES_START_TIME = "PREFERENCES_START_TIME";
+    public static final String PREFERENCES_NFC_ID = "PREFERENCES_NFC_ID";
 
     public static final String PREFERENCE_STYLE_WIDGET = "PREFERENCE_STYLE_WIDGET";
     public static final String PREFERENCE_STYLE_WIDGET_MD = "PREFERENCE_STYLE_WIDGET_MD";

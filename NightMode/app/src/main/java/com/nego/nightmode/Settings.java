@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -74,6 +77,30 @@ public class Settings extends AppCompatActivity {
                 startActivity(new Intent(Settings.this, ToggleSettings.class));
             }
         });
+
+        // NFC
+        NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
+        NfcAdapter adapter = manager.getDefaultAdapter();
+        if (adapter == null) {
+            findViewById(R.id.nfcOk).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.nfcOk).setVisibility(View.VISIBLE);
+            if (adapter.isEnabled()) {
+                findViewById(R.id.action_nfc).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO fare un'activity che abbia un broadcast receiver per i tag e lo scriva da qualche parte
+                    }
+                });
+            } else {
+                findViewById(R.id.action_nfc).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(Settings.this, getString(R.string.error_nfc_disabled), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }
     }
 
 }

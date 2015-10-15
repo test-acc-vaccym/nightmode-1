@@ -117,6 +117,7 @@ public class NMToggle extends IntentService {
             if (on)
                 SP.edit().putLong(Costants.PREFERENCES_START_TIME, Calendar.getInstance().getTimeInMillis()).apply();
             Utils.showNotification(this, on);
+            Utils.updateWidget(this);
         }
     }
 

@@ -110,13 +110,13 @@
     <string name="app_name_disabled">Night Mode Disabled</string>
     <string name="action_disabled_night_mode">Click here to disabled night mode</string>
     <string name="title_sections_toggle_preferences">Toggle Preferences</string>
-    <string name="title_remember_old_preferences">Toggle Status</string>
+    <string name="title_remember_old_preferences">Remember Status</string>
     <string name="subtitle_remember_old_preferences">Remember old toggle status</string>
     <string name="title_alarm_level_preferences">Alarm Level</string>
     <string name="subtitle_alarm_level_preferences">Chosse alarm level when night mode is on</string>
     <string name="action_save">Save</string>
-    <string name="title_choose_toggle_preferences">Choose night mode toggles</string>
-    <string name="subtitle_choose_toggle_preferences">Choose what to deactivate on night mode</string>
+    <string name="title_choose_toggle_preferences">Choose toggles</string>
+    <string name="subtitle_choose_toggle_preferences">Choose what to switch when night mode is activated</string>
     <string name="title_notification_preferences">Night mode off notification</string>
     <string name="subtitle_notification_preferences">Show a notification when night mode is on to turn off that</string>
     <string name="start_time_disabled">Activated last time %s</string>
@@ -127,4 +127,15 @@
     <string name="title_activity_about">About</string>
     <string name="subtitle_about">App info, help and feedback</string>
     <string name="subtitle_settings">Manage preferences and app settings</string>
+    <string name="text_version">v.</string>
+    <string name="title_community">Night Mode Community</string>
+    <string name="subtitle_community">Help, feedback and suggestions</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="title_auto_preferences">Automatic Rules</string>
+    <string name="subtitle_auto_preferences">Add rules to activate night mode automatically</string>
+    <string name="title_nfc_preferences">Nfc Receiver</string>
+    <string name="subtitle_nfc_preferences">Pair a nfc item to activate night mode faster</string>
+    <string name="subtitle_nfc_paired_preferences">Nfc item paired</string>
+    <string name="error_nfc_disabled">Nfc Disabled</string>
 </resources>

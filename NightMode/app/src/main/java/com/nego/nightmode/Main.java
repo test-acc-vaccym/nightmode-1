@@ -1,5 +1,6 @@
 package com.nego.nightmode;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -51,7 +53,7 @@ public class Main extends AppCompatActivity {
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
 
-        updateUI(SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
+        createUI(SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
         button_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,11 +106,56 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    public void updateUI(boolean activated) {
+    public void createUI(boolean activated) {
         button.setSelected(activated);
         button_title.setText(activated ? R.string.action_disable : R.string.action_enable);
         ui_enabled.setText(activated ? R.string.app_name_disabled : R.string.app_name_disabled);
         ui_start_time.setText(getString(activated ? R.string.start_time_enabled : R.string.start_time_disabled, Utils.getDate(this, SP.getLong(Costants.PREFERENCES_START_TIME, 0))));
+    }
+
+    public void updateUI(final boolean activated) {
+        final View myView = findViewById(R.id.rect_colored);
+        myView.animate()
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .alpha(0)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            int cx = myView.getWidth() / 2;
+                            int cy = myView.getHeight() - button_title.getHeight();
+                            int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
+                            Animator anim =
+                                    ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+
+                            // make the view visible and start the animation
+                            myView.setAlpha(1);
+                            myView.setBackgroundColor(ContextCompat.getColor(Main.this, activated ? R.color.icon_i : R.color.primary));
+                            anim.setInterpolator(new AccelerateDecelerateInterpolator());
+                            anim.setDuration(500);
+                            anim.start();
+                        } else{
+                            myView.setAlpha(1);
+                            myView.setBackgroundColor(ContextCompat.getColor(Main.this, activated ? R.color.icon_i : R.color.primary));
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                }).start();
+        createUI(activated);
     }
 
     public void switchNightMode(boolean activated) {

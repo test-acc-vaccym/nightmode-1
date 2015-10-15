@@ -1,10 +1,14 @@
 package com.nego.nightmode;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 
 import com.nego.nightmode.Functions.NotificationF;
+import com.nego.nightmode.Widget.NightModeToggle;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,17 +17,17 @@ import java.util.Date;
 
 public class Utils {
 
-/*
+
 
     public static void updateWidget(Context context) {
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
-        int[] widgetIds = widgetManager.getAppWidgetIds(new ComponentName(context, FocusWidget.class));
-        Intent update = new Intent(context, FocusWidget.class);
+        int[] widgetIds = widgetManager.getAppWidgetIds(new ComponentName(context, NightModeToggle.class));
+        Intent update = new Intent(context, NightModeToggle.class);
         update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
         update.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        widgetManager.notifyAppWidgetViewDataChanged(widgetIds, R.id.list);
+        widgetManager.notifyAppWidgetViewDataChanged(widgetIds, R.id.button);
         context.sendBroadcast(update);
-    }*/
+    }
 
 
     public static boolean isBrokenSamsungDevice() {

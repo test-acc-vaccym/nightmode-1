@@ -136,20 +136,10 @@
                 android:layout_marginStart="16dp"/>
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary"
-                android:text="@string/title_sections_style"
-                android:fontFamily="sans-serif-medium"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-        </RelativeLayout>
+            android:layout_height="1dp"
+            android:background="@color/back_select"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -157,22 +147,56 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
-            android:id="@+id/action_widget_style">
+            android:id="@+id/action_auto">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_choose_toggle_preferences"
-                android:id="@+id/widget_style_title" />
+                android:text="@string/title_auto_preferences"
+                android:id="@+id/auto_title" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondary_text"
-                android:id="@+id/widget_style_subtitle"
-                android:text="@string/subtitle_choose_toggle_preferences"
-                android:layout_below="@+id/widget_style_title" />
+                android:id="@+id/auto_subtitle"
+                android:text="@string/subtitle_auto_preferences"
+                android:layout_below="@+id/auto_title" />
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/nfcOk">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/back_select"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/list_item_background_card"
+                android:clickable="true"
+                android:id="@+id/action_nfc">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/title_nfc_preferences"
+                    android:id="@+id/nfc_title" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondary_text"
+                    android:id="@+id/nfc_subtitle"
+                    android:text="@string/subtitle_nfc_preferences"
+                    android:layout_below="@+id/nfc_title" />
+            </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -67,6 +67,11 @@
                 <action android:name="android.intent.action.ALARM" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".Receiver.NfcReceiver" >
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".Receiver.ShortcutReceiver"
@@ -87,6 +92,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
         </activity>
+
+
+        <receiver android:name=".Widget.NightModeToggle" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/night_mode_toggle_info" />
+        </receiver>
+
     </application>
 
 </manifest>

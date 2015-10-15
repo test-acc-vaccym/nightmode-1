@@ -17,22 +17,20 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_choose_toggle">
+            android:clickable="true">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_choose_toggle_preferences"
-                android:id="@+id/choose_toggle_title" />
+                android:text="@string/app_name"
+                android:id="@+id/version_title" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondary_text"
-                android:id="@+id/choose_toggle_subtitle"
-                android:text="@string/subtitle_choose_toggle_preferences"
-                android:layout_below="@+id/choose_toggle_title" />
+                android:id="@+id/subtitle_versione"
+                android:layout_below="@+id/version_title" />
         </RelativeLayout>
 
         <LinearLayout
@@ -46,49 +44,20 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
-            android:id="@+id/action_remember_old">
+            android:id="@+id/action_community">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_remember_old_preferences"
-                android:id="@+id/remember_old_title" />
+                android:text="@string/title_community"
+                android:id="@+id/community_title" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondary_text"
-                android:id="@+id/remember_old_subtitle"
-                android:text="@string/subtitle_remember_old_preferences"
-                android:layout_below="@+id/remember_old_title" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
-            android:id="@+id/action_notification">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_notification_preferences"
-                android:id="@+id/notification_title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/notification_subtitle"
-                android:text="@string/subtitle_notification_preferences"
-                android:layout_below="@+id/notification_title" />
+                android:text="@string/subtitle_community"
+                android:layout_below="@+id/community_title" />
         </RelativeLayout>
 
 
