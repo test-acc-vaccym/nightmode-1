@@ -93,7 +93,6 @@
                 android:value="com.nego.nightmode.Main" />
         </activity>
 
-
         <receiver android:name=".Widget.NightModeToggle" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -104,6 +103,15 @@
                 android:resource="@xml/night_mode_toggle_info" />
         </receiver>
 
+        <activity
+            android:name=".Rules"
+            android:label="@string/title_activity_rules"
+            android:parentActivityName=".Settings"
+            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nego.nightmode.Settings" />
+        </activity>
     </application>
 
 </manifest>

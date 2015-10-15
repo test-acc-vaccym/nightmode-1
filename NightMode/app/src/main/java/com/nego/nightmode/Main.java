@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -128,18 +129,21 @@ public class Main extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                             int cx = myView.getWidth() / 2;
-                            int cy = myView.getHeight() - button_title.getHeight();
+                            int cy = ((myView.getHeight() / 2) - button.getHeight()) / 2 + button.getHeight() / 2;
+                            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                                cx = button.getWidth() / 2 + ((myView.getWidth() / 2) - button.getWidth()) / 2;
+                                cy = myView.getHeight() / 2;
+                            }
                             int finalRadius = Math.max(myView.getWidth(), myView.getHeight());
                             Animator anim =
                                     ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
 
-                            // make the view visible and start the animation
                             myView.setAlpha(1);
                             myView.setBackgroundColor(ContextCompat.getColor(Main.this, activated ? R.color.icon_i : R.color.primary));
                             anim.setInterpolator(new AccelerateDecelerateInterpolator());
                             anim.setDuration(500);
                             anim.start();
-                        } else{
+                        } else {
                             myView.setAlpha(1);
                             myView.setBackgroundColor(ContextCompat.getColor(Main.this, activated ? R.color.icon_i : R.color.primary));
                         }

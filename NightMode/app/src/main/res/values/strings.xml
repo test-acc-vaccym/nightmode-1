@@ -138,4 +138,16 @@
     <string name="subtitle_nfc_preferences">Pair a nfc item to activate night mode faster</string>
     <string name="subtitle_nfc_paired_preferences">Nfc item paired</string>
     <string name="error_nfc_disabled">Nfc Disabled</string>
+    <string name="text_great">Great</string>
+    <string name="text_first_tour">Welcome to Night Mode!\nClick on the button below to turn off everything you don\'t need in a single tap.</string>
+    <string name="title_activity_rules">Automatic Rules</string>
+    <string name="text_monday">Monday</string>
+    <string name="text_tuesday">Tuesday</string>
+    <string name="text_wednesday">Wednesday</string>
+    <string name="text_thursday">Thursday</string>
+    <string name="text_friday">Friday</string>
+    <string name="text_saturday">Saturday</string>
+    <string name="text_sunday">Sunday</string>
+    <string name="text_from">From</string>
+    <string name="text_to">To</string>
 </resources>
