@@ -69,6 +69,7 @@
         </receiver>
         <receiver android:name=".Receiver.NfcReceiver" >
             <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
         </receiver>

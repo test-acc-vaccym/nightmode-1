@@ -25,6 +25,11 @@ public class NMToggle extends IntentService {
         context.startService(intent);
     }
 
+    private void sendResponse(String s) {
+        Intent i = new Intent(s);
+        sendBroadcast(i);
+    }
+
     public NMToggle() {
         super("NMToggle");
     }
@@ -118,6 +123,7 @@ public class NMToggle extends IntentService {
                 SP.edit().putLong(Costants.PREFERENCES_START_TIME, Calendar.getInstance().getTimeInMillis()).apply();
             Utils.showNotification(this, on);
             Utils.updateWidget(this);
+            sendResponse(Costants.ACTION_NIGHT_MODE_TOGGLE);
         }
     }
 

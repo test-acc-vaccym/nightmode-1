@@ -44,6 +44,8 @@
     <color name="back_card">#424242</color>
     <color name="background_dialog">#bb000000</color>
 
+    <color name="background_m_light">#fffafafa</color>
+
     <color name="ripple_dark">#42ffffff</color>
     <color name="ripple_light">#1f000000</color>
 </resources>
