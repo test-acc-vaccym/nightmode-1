@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.PowerManager;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
@@ -124,6 +125,11 @@ public class NMToggle extends IntentService {
             Utils.showNotification(this, on);
             Utils.updateWidget(this);
             sendResponse(Costants.ACTION_NIGHT_MODE_TOGGLE);
+
+            // SCREEN OFF
+            if (SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true)) {
+                //TODO screen off qui o nel main perchè forse serve activity
+            }
         }
     }
 

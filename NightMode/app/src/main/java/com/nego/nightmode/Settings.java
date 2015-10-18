@@ -70,6 +70,22 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        // SCREEN OFF
+        final CheckBox screenOffC = (CheckBox) findViewById(R.id.screen_check);
+        screenOffC.setChecked(SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true));
+        screenOffC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SP.edit().putBoolean(Costants.PREFERENCES_SCREEN_OFF, isChecked).apply();
+            }
+        });
+        findViewById(R.id.action_screen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screenOffC.setChecked(!screenOffC.isChecked());
+            }
+        });
+
         // TOGGLE MENU
         findViewById(R.id.action_choose_toggle).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,15 +95,15 @@ public class Settings extends AppCompatActivity {
         });
 
         // AUTOMATIC RULES
-        /*findViewById(R.id.action_auto).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.action_auto).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, Rules.class));
             }
-        });*/
+        });
 
         // NFC
-        /*NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
+        NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
         if (adapter == null) {
             findViewById(R.id.nfcOk).setVisibility(View.GONE);
@@ -108,7 +124,7 @@ public class Settings extends AppCompatActivity {
                     }
                 });
             }
-        }*/
+        }
     }
 
 }

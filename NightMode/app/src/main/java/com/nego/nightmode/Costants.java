@@ -26,17 +26,16 @@ public class Costants {
     public static final String PREFERENCES_NOTIFICATION = "PREFERENCES_NOTIFICATION";
     public static final String PREFERENCES_START_TIME = "PREFERENCES_START_TIME";
     public static final String PREFERENCES_NFC_ID = "PREFERENCES_NFC_ID";
+    public static final String PREFERENCES_SCREEN_OFF = "PREFERENCES_SCREEN_OFF";
 
     public static final String PREFERENCES_FIRST_TOUR = "PREFERENCES_FIRST_TOUR";
-
-    public static final String PREFERENCE_STYLE_WIDGET = "PREFERENCE_STYLE_WIDGET";
-    public static final String PREFERENCE_STYLE_WIDGET_MD = "PREFERENCE_STYLE_WIDGET_MD";
-    public static final String PREFERENCE_STYLE_WIDGET_ML = "PREFERENCE_STYLE_WIDGET_ML";
 
 
     public static final String ALARM_ACTION = "android.intent.action.ALARM";
 
     public static final String ALARM_REPEAT_DAY = "ALARM_REPEAT_DAY";
     public static final String ALARM_REPEAT_WEEK = "ALARM_REPEAT_WEEK";
+
+    public static final String ACTION_NOTIFICATION_LISTENER_SERVICE = "android.intent.action.NOTIFICATION_LISTENER_SERVICE";
 
 }

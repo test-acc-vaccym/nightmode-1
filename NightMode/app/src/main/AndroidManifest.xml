@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,7 @@
         <activity
             android:name=".Main"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +31,7 @@
             android:name=".Settings"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Main"
-            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            android:theme="@style/AppTheme.Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
@@ -39,7 +40,7 @@
             android:name=".ToggleSettings"
             android:label="@string/title_sections_toggle_preferences"
             android:parentActivityName=".Settings"
-            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            android:theme="@style/AppTheme.Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Settings" />
@@ -67,12 +68,6 @@
                 <action android:name="android.intent.action.ALARM" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver.NfcReceiver" >
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".Receiver.ShortcutReceiver"
@@ -88,7 +83,7 @@
             android:name=".About"
             android:label="@string/title_activity_about"
             android:parentActivityName=".Main"
-            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            android:theme="@style/AppTheme.Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
@@ -108,11 +103,22 @@
             android:name=".Rules"
             android:label="@string/title_activity_rules"
             android:parentActivityName=".Settings"
-            android:theme="@style/AppTheme.NoActionBar.Settings" >
+            android:theme="@style/AppTheme.Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Settings" />
         </activity>
+        <activity android:name=".Receiver.NfcReceiver" >
+        </activity>
+
+
+        <service android:name=".Functions.NLService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

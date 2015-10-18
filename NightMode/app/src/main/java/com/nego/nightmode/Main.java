@@ -12,7 +12,11 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
+import android.nfc.NfcAdapter;
+import android.nfc.tech.NfcA;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.service.notification.NotificationListenerService;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -24,11 +28,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nego.nightmode.Functions.NLService;
 import com.nego.nightmode.Functions.NMToggle;
 
 public class Main extends AppCompatActivity {
@@ -82,8 +88,7 @@ public class Main extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Costants.ACTION_NIGHT_MODE_ON);
-        intentFilter.addAction(Costants.ACTION_NIGHT_MODE_OFF);
+        intentFilter.addAction(Costants.ACTION_NIGHT_MODE_TOGGLE);
 
         mReceiver = new BroadcastReceiver() {
             @Override

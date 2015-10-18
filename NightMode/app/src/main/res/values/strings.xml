@@ -150,4 +150,6 @@
     <string name="text_sunday">Sunday</string>
     <string name="text_from">From</string>
     <string name="text_to">To</string>
+    <string name="title_screen_preferences">Screen Off</string>
+    <string name="subtitle_screen_preferences">Turn off screen when you enable night mode</string>
 </resources>
