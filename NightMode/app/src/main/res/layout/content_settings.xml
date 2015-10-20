@@ -147,49 +147,6 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
-            android:id="@+id/action_screen">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_screen_preferences"
-                android:id="@+id/screen_title"
-                android:layout_toLeftOf="@+id/screen_check"
-                android:layout_toStartOf="@+id/screen_check" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/screen_subtitle"
-                android:text="@string/subtitle_screen_preferences"
-                android:layout_below="@+id/screen_title"
-                android:layout_toLeftOf="@+id/screen_check"
-                android:layout_toStartOf="@+id/screen_check" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/screen_check"
-                android:checked="true"
-                android:theme="@style/mDialog"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
             android:id="@+id/action_auto">
             <TextView
                 android:layout_width="match_parent"

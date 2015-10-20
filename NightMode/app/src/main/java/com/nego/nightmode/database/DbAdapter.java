@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.nego.nightmode.Alarm;
+
 import java.util.ArrayList;
-/*
+
 public class DbAdapter {
 
 
@@ -16,16 +18,14 @@ public class DbAdapter {
     private DatabaseHelper dbHelper;
 
     // Database fields
-    private static final String DATABASE_TABLE_PEOPLE = "people";
+    private static final String DATABASE_TABLE_PEOPLE = "alarm";
 
     public static final String KEY_ID = "id";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_IMG = "img";
-    public static final String KEY_MAX_DUR = "maxDur";
-    public static final String KEY_ADDRESS = "address";
-    public static final String KEY_NOT_WITH = "notWith";
-
-    public static final String KEY_PERSON = "person";
+    public static final String KEY_DAY = "day";
+    public static final String KEY_START = "start";
+    public static final String KEY_END = "end";
+    public static final String KEY_PSTART = "pStart";
+    public static final String KEY_PEND = "pEnd";
 
     public DbAdapter(Context context) {
         this.context = context;
@@ -45,64 +45,38 @@ public class DbAdapter {
         dbHelper.close();
     }
 
-    private ContentValues createContentValues(int ID, String name, long max_dur, String img, String address, ArrayList<String> notWith) {
+    private ContentValues createContentValues(int day, long start, long end, int pStart, int pEnd) {
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, ID);
-        values.put(KEY_NAME, name);
-        values.put(KEY_IMG, img);
-        values.put(KEY_MAX_DUR, max_dur);
-        values.put(KEY_NOT_WITH, Utils.arrayListToString(notWith));
-        values.put(KEY_ADDRESS, address);
+        values.put(KEY_DAY, day);
+        values.put(KEY_START, start);
+        values.put(KEY_END, end);
+        values.put(KEY_PSTART, pStart);
+        values.put(KEY_PEND, pEnd);
 
         return values;
     }
 
-    private ContentValues createContentValues(String name, long max_dur, String img, String address, ArrayList<String> notWith) {
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, name);
-        values.put(KEY_IMG, img);
-        values.put(KEY_MAX_DUR, max_dur);
-        values.put(KEY_NOT_WITH, Utils.arrayListToString(notWith));
-        values.put(KEY_ADDRESS, address);
-
-        return values;
-    }
-
-    private ContentValues createContentValues(String address, int person) {
-        ContentValues values = new ContentValues();
-        values.put(KEY_ADDRESS, address);
-        values.put(KEY_PERSON, person);
-
-        return values;
-    }
-
-    public boolean createPerson(Person p) {
-        ContentValues initialValues = createContentValues(p.getName(), p.getMax_dur(), p.getImg(), p.getAddress(), p.getNotWith());
+    public boolean createAlarm(Alarm a) {
+        ContentValues initialValues = createContentValues(a.getDay(), a.getStart(), a.getEnd(), a.getpStart(), a.getpEnd());
         return database.insertOrThrow(DATABASE_TABLE_PEOPLE, null, initialValues) > 0;
     }
 
-    public boolean updatePerson(Person p) {
-        ContentValues updateValues = createContentValues(p.getId(), p.getName(), p.getMax_dur(), p.getImg(), p.getAddress(), p.getNotWith());
-        return database.update(DATABASE_TABLE_PEOPLE, updateValues, KEY_ID + "==" + p.getId(), null) > 0;
+    public boolean deleteAlarm(int day) {
+        return database.delete(DATABASE_TABLE_PEOPLE, KEY_DAY + "==" + day, null) > 0;
     }
 
 
-    public boolean deletePerson(int ID) {
-        return database.delete(DATABASE_TABLE_PEOPLE, KEY_ID + "==" + ID, null) > 0;
+    public Cursor fetchAllAlarms() {
+        return database.query(DATABASE_TABLE_PEOPLE, new String[]{KEY_ID, KEY_DAY, KEY_START, KEY_END, KEY_PSTART, KEY_PEND}, null, null, null, null, null);
     }
 
-
-    public Cursor fetchAllPersons() {
-        return database.query(DATABASE_TABLE_PEOPLE, new String[]{KEY_ID, KEY_NAME, KEY_MAX_DUR, KEY_IMG, KEY_ADDRESS, KEY_NOT_WITH}, null, null, null, null, null);
-    }
-
-    public Cursor getPersonById(int id) {
+    public Cursor getAlarmByDay(int day) {
         Cursor mCursor = database.query(true, DATABASE_TABLE_PEOPLE, new String[]{
-                        KEY_ID, KEY_NAME, KEY_MAX_DUR, KEY_IMG, KEY_ADDRESS, KEY_NOT_WITH},
-                KEY_ID + " == '" + id + "'", null, null, null, null, null);
+                        KEY_ID, KEY_DAY, KEY_START, KEY_END, KEY_PSTART, KEY_PEND},
+                KEY_DAY + " == " + day, null, null, null, null, null);
 
         return mCursor;
     }
 
 
-}*/
+}

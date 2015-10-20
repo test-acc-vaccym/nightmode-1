@@ -119,6 +119,11 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+
+
+        <service android:name=".Functions.AlarmService"
+            android:exported="false"  >
+        </service>
     </application>
 
 </manifest>

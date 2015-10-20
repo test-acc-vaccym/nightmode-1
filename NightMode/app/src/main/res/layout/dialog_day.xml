@@ -8,7 +8,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="200dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/primary_text"
+            android:text="@string/title_set_alarm"
+            android:padding="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:text="@string/subtitle_set_alarm"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/back_selected_item"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0dp"
@@ -16,6 +37,7 @@
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:id="@+id/action_from"
             android:padding="16dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -37,6 +59,7 @@
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:id="@+id/action_to"
             android:padding="16dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -51,6 +74,14 @@
                 android:textColor="@color/primary_text"
                 android:id="@+id/time_to"
                 android:text="11:00"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/icon.r"
+                android:visibility="gone"
+                android:id="@+id/day_after"
+                android:text="@string/text_day_after"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -62,14 +93,16 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@color/accent"
-            android:text="@android:string/cancel"
+            android:text="@string/action_reset"
+            android:id="@+id/button_reset"
             android:padding="16dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@color/accent"
-            android:text="@android:string/ok"
+            android:text="@string/action_save"
+            android:id="@+id/action_save"
             android:padding="16dp"
             android:layout_marginRight="16dp" />
     </LinearLayout>

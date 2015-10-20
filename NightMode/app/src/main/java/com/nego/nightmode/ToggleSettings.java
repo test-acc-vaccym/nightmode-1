@@ -131,5 +131,21 @@ public class ToggleSettings extends AppCompatActivity {
             }
         });
 
+        // SCREEN OFF
+        final CheckBox screenOffC = (CheckBox) findViewById(R.id.screen_check);
+        screenOffC.setChecked(SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true));
+        screenOffC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SP.edit().putBoolean(Costants.PREFERENCES_SCREEN_OFF, isChecked).apply();
+            }
+        });
+        findViewById(R.id.action_screen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screenOffC.setChecked(!screenOffC.isChecked());
+            }
+        });
+
     }
 }

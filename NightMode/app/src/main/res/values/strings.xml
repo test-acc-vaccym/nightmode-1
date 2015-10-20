@@ -152,4 +152,11 @@
     <string name="text_to">To</string>
     <string name="title_screen_preferences">Screen Off</string>
     <string name="subtitle_screen_preferences">Turn off screen when you enable night mode</string>
+    <string name="text_no_alarm">No Alarm</string>
+    <string name="text_day_after">Day After</string>
+    <string name="title_set_alarm">Set Alarm</string>
+    <string name="subtitle_set_alarm">Entering this alarm, the device will go into night mode automatically from start time to end time.</string>
+    <string name="action_reset">Reset</string>
+    <string name="text_attention">Attention</string>
+    <string name="text_ask_reset_alarm">Are you sure you want to reset this alarm?</string>
 </resources>

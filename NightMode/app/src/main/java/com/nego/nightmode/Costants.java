@@ -32,9 +32,10 @@ public class Costants {
 
 
     public static final String ALARM_ACTION = "android.intent.action.ALARM";
-
-    public static final String ALARM_REPEAT_DAY = "ALARM_REPEAT_DAY";
-    public static final String ALARM_REPEAT_WEEK = "ALARM_REPEAT_WEEK";
+    public static final String ALARM_EXTRA_ACTION = "android.intent.action.ALARM_EXTRA";
+    public static final String ACTION_CREATE = "android.intent.action.ACTION_CREATE";
+    public static final String ACTION_DELETE = "android.intent.action.ACTION_DELETE";
+    public static final String ALARM_EXTRA = "android.intent.extra.ALARM_EXTRA";
 
     public static final String ACTION_NOTIFICATION_LISTENER_SERVICE = "android.intent.action.NOTIFICATION_LISTENER_SERVICE";
 
