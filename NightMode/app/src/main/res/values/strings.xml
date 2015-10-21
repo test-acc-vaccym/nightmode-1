@@ -159,4 +159,7 @@
     <string name="action_reset">Reset</string>
     <string name="text_attention">Attention</string>
     <string name="text_ask_reset_alarm">Are you sure you want to reset this alarm?</string>
+    <string name="action_grant_deviceadmin">Make this application a device administrator to use this feature</string>
+    <string name="text_request_dev">Make this application a device administrator to turn off screen when you enable night mode</string>
+    <string name="warning_remove_dev">Warning: remove admin permissions shout down screen off feature</string>
 </resources>

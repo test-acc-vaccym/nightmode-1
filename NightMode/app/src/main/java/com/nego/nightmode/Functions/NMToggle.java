@@ -1,19 +1,27 @@
 package com.nego.nightmode.Functions;
 
 import android.app.IntentService;
+import android.app.admin.DevicePolicyManager;
 import android.bluetooth.BluetoothAdapter;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.IBinder;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.R;
+import com.nego.nightmode.Receiver.DeviceAdminReceiver;
 import com.nego.nightmode.Utils;
 
 import java.util.Calendar;
@@ -78,8 +86,6 @@ public class NMToggle extends IntentService {
                 }
             }
 
-            // BRIGHTNESS
-
             // ALARM VOLUME
             if (SP.getBoolean(Costants.PREFERENCES_ALARM_SOUND, true)) {
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -105,17 +111,17 @@ public class NMToggle extends IntentService {
                     if (on) {
                         SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        // TODO
-                        /*NotificationListenerService service = new NotificationListenerService() {};
-                        service.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);*/
+                        priorityMode();
                     } else {
                         am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
                     }
                 } else {
-                    if (on)
+                    if (on) {
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                    else
+                        priorityMode();
+                    } else {
                         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    }
                 }
             }
 
@@ -127,10 +133,69 @@ public class NMToggle extends IntentService {
             sendResponse(Costants.ACTION_NIGHT_MODE_TOGGLE);
 
             // SCREEN OFF
-            if (SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true)) {
-                //TODO screen off qui o nel main perchè forse serve activity
+            if (SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, false) && on) {
+                final DevicePolicyManager policyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+                ComponentName adminReceiver = new ComponentName(NMToggle.this, DeviceAdminReceiver.class);
+                final boolean admin = policyManager.isAdminActive(adminReceiver);
+                if (admin) {
+                    Log.i("SCREEN OFF", "Going to sleep now.");
+                    policyManager.lockNow();
+                } else {
+                    Log.i("SCREEN OFF", "Not an admin");
+                }
             }
         }
     }
+
+    public boolean haveNotificationAccess() {
+        ContentResolver contentResolver = getContentResolver();
+        String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
+        String packageName = getPackageName();
+
+        if (enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName))
+            return false;
+        else
+            return true;
+    }
+
+    private NLService nlService = null;
+
+    public void priorityMode() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && haveNotificationAccess()){
+            Intent i = new Intent(this, NLService.class);
+            final ServiceConnection mServerConn = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder binder) {
+                    Log.d("SERVICE", "onServiceConnected");
+                    NLService.LocalBinder service = (NLService.LocalBinder) binder;
+                    nlService = service.getService();
+                    nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                    Log.d("SERVICE", "onServiceDisconnected");
+                    nlService = null;
+                }
+            };
+            start(i, mServerConn);
+            if (nlService != null) {
+                Log.i("PRIORITY", "ENTRATO");
+                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
+            }
+            stop(i, mServerConn);
+        }
+    }
+
+    public void start(Intent i, ServiceConnection mServerConn) {
+        bindService(i, mServerConn, Context.BIND_AUTO_CREATE);
+        startService(i);
+    }
+
+    public void stop(Intent i, ServiceConnection mServerConn) {
+        stopService(new Intent(this, NLService.class));
+        unbindService(mServerConn);
+    }
+
 
 }

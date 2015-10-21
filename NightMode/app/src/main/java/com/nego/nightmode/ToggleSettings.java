@@ -1,6 +1,9 @@
 package com.nego.nightmode;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +21,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.Receiver.DeviceAdminReceiver;
 
 public class ToggleSettings extends AppCompatActivity {
 
@@ -132,20 +139,58 @@ public class ToggleSettings extends AppCompatActivity {
         });
 
         // SCREEN OFF
-        final CheckBox screenOffC = (CheckBox) findViewById(R.id.screen_check);
-        screenOffC.setChecked(SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true));
-        screenOffC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SP.edit().putBoolean(Costants.PREFERENCES_SCREEN_OFF, isChecked).apply();
-            }
-        });
-        findViewById(R.id.action_screen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                screenOffC.setChecked(!screenOffC.isChecked());
-            }
-        });
+        updateUi();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUi();
+    }
+
+    public void updateUi() {
+        final CheckBox screenOffC = (CheckBox) findViewById(R.id.screen_check);
+        if (checkAdmin()) {
+            screenOffC.setVisibility(View.VISIBLE);
+            screenOffC.setChecked(SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, true));
+            screenOffC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SP.edit().putBoolean(Costants.PREFERENCES_SCREEN_OFF, isChecked).apply();
+                }
+            });
+            findViewById(R.id.action_screen).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    screenOffC.setChecked(!screenOffC.isChecked());
+                }
+            });
+        } else {
+            screenOffC.setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.screen_subtitle)).setText(R.string.action_grant_deviceadmin);
+            findViewById(R.id.action_screen).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ComponentName mAdminName = new ComponentName(ToggleSettings.this, DeviceAdminReceiver.class);
+                    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+                            mAdminName);
+                    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                            getString(R.string.text_request_dev));
+                    startActivityForResult(intent, 5);
+                }
+            });
+        }
+    }
+
+    public boolean checkAdmin() {
+        DevicePolicyManager mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName mAdminName = new ComponentName(this, DeviceAdminReceiver.class);
+
+        if (!mDPM.isAdminActive(mAdminName)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

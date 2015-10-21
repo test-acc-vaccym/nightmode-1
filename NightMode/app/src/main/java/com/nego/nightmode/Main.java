@@ -105,13 +105,6 @@ public class Main extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-        }
-    }
-
     public void createUI(boolean activated) {
         button.setSelected(activated);
         button_title.setText(activated ? R.string.action_disable : R.string.action_enable);
