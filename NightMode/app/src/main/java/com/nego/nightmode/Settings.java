@@ -1,8 +1,12 @@
 package com.nego.nightmode;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.nfc.NfcAdapter;
@@ -21,11 +25,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nego.nightmode.Receiver.NfcReceiver;
 
 public class Settings extends AppCompatActivity {
 
-    SharedPreferences SP;
+    private SharedPreferences SP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +104,9 @@ public class Settings extends AppCompatActivity {
                 findViewById(R.id.action_nfc).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //TODO fare un'activity che abbia un broadcast receiver per i tag e lo scriva da qualche parte
+                        Intent i = new Intent(Settings.this, NfcReceiver.class);
+                        i.setAction(Costants.ACTION_PAIR_NFC);
+                        startActivity(i);
                     }
                 });
             } else {
@@ -110,5 +119,7 @@ public class Settings extends AppCompatActivity {
             }
         }
     }
+
+
 
 }

@@ -28,6 +28,15 @@ public class NLService extends NotificationListenerService {
 
     private NLServiceReceiver nlservicereciver;
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        nlservicereciver = new NLServiceReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Costants.ACTION_NOTIFICATION_LISTENER_SERVICE);
+        registerReceiver(nlservicereciver, filter);
+    }
+
     private final IBinder mBinder = new LocalBinder();
     public class LocalBinder extends Binder {
         NLService getService() {
@@ -38,21 +47,6 @@ public class NLService extends NotificationListenerService {
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        nlservicereciver = new NLServiceReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Costants.ACTION_NOTIFICATION_LISTENER_SERVICE);
-        registerReceiver(nlservicereciver, filter);
-    }
-
-    @Override
-    public boolean onUnbind(Intent mIntent) {
-        boolean mOnUnbind = super.onUnbind(mIntent);
-        return mOnUnbind;
     }
 
     @Override

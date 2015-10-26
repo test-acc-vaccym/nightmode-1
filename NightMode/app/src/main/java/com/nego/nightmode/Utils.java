@@ -64,11 +64,11 @@ public class Utils {
             if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR) &&
                     today.get(Calendar.MONTH) == byR.get(Calendar.MONTH) &&
                     today.get(Calendar.DAY_OF_MONTH) == byR.get(Calendar.DAY_OF_MONTH)) {
-                return HM.format(new Date(byR.getTimeInMillis()));
+                return " " + context.getString(R.string.text_at) + " " + HM.format(new Date(byR.getTimeInMillis()));
             } else if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR)) {
-                return DM.format(new Date(byR.getTimeInMillis()));
+                return " " + context.getString(R.string.text_on) + " " + DM.format(new Date(byR.getTimeInMillis()));
             } else {
-                return MY.format(new Date(byR.getTimeInMillis()));
+                return " " + context.getString(R.string.text_on) + " " + MY.format(new Date(byR.getTimeInMillis()));
             }
         }
     }
@@ -86,4 +86,21 @@ public class Utils {
         }
     }
 
+
+    public static String ByteArrayToHexString(byte [] inarray)
+    {
+        int i, j, in;
+        String [] hex = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+        String out= "";
+
+        for(j = 0 ; j < inarray.length ; ++j)
+        {
+            in = (int) inarray[j] & 0xff;
+            i = (in >> 4) & 0x0f;
+            out += hex[i];
+            i = in & 0x0f;
+            out += hex[i];
+        }
+        return out;
+    }
 }

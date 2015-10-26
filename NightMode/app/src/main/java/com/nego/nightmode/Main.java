@@ -59,6 +59,7 @@ public class Main extends AppCompatActivity {
         ui_start_time = (TextView) findViewById(R.id.start_time);
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
+        SP.edit().remove(Costants.PREFERENCES_START_TIME).apply();
 
         createUI(SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
         button_title.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +137,7 @@ public class Main extends AppCompatActivity {
                             Animator anim =
                                     ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
 
+                            createUI(activated);
                             myView.setAlpha(1);
                             myView.setBackgroundColor(ContextCompat.getColor(Main.this, activated ? R.color.icon_i : R.color.primary));
                             anim.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -157,7 +159,6 @@ public class Main extends AppCompatActivity {
 
                     }
                 }).start();
-        createUI(activated);
     }
 
     public void switchNightMode(boolean activated) {

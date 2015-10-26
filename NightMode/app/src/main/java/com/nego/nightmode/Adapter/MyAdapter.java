@@ -142,10 +142,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     ((TextView) dialogView.findViewById(R.id.time_to)).setText("08:00");
                     start.set(Calendar.HOUR_OF_DAY, 23);
                     start.set(Calendar.MINUTE, 0);
+                    start.set(Calendar.SECOND, 0);
                     start.set(Calendar.MILLISECOND, 0);
                     start.set(Calendar.DAY_OF_WEEK, mDataset.get(position).getDay());
                     end.set(Calendar.HOUR_OF_DAY, 8);
                     end.set(Calendar.MINUTE, 0);
+                    end.set(Calendar.SECOND, 0);
                     end.set(Calendar.MILLISECOND, 0);
                     end.set(Calendar.DAY_OF_WEEK, mDataset.get(position).getDay());
                     end.add(Calendar.DAY_OF_WEEK, 1);

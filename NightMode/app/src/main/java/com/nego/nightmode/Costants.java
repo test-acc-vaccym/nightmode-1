@@ -27,6 +27,7 @@ public class Costants {
     public static final String PREFERENCES_START_TIME = "PREFERENCES_START_TIME";
     public static final String PREFERENCES_NFC_ID = "PREFERENCES_NFC_ID";
     public static final String PREFERENCES_SCREEN_OFF = "PREFERENCES_SCREEN_OFF";
+    public static final String ACTION_PAIR_NFC = "android.intent.action.PAIR_NFC";
 
     public static final String PREFERENCES_FIRST_TOUR = "PREFERENCES_FIRST_TOUR";
 

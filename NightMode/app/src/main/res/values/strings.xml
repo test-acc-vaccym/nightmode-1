@@ -162,4 +162,10 @@
     <string name="action_grant_deviceadmin">Make this application a device administrator to use this feature</string>
     <string name="text_request_dev">Make this application a device administrator to turn off screen when you enable night mode</string>
     <string name="warning_remove_dev">Warning: remove admin permissions shout down screen off feature</string>
+    <string name="action_pair_nfc">Touch your phone to a nfc tag. You’ll then hear a notification tone or feel a vibration as soon as the NFC tag is activated.</string>
+    <string name="title_sections_automate">Automatic Actions</string>
+    <string name="text_at">at</string>
+    <string name="text_on">on</string>
+    <string name="text_ask_reset_nfc">Are you sure to reset nfc tag id?</string>
+    <string name="text_ask_update_nfc">Are you sure to update nfc tag id and lose the old one?</string>
 </resources>

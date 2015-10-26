@@ -111,14 +111,14 @@ public class NMToggle extends IntentService {
                     if (on) {
                         SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        priorityMode();
+                        //TODO priorityMode();
                     } else {
                         am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
                     }
                 } else {
                     if (on) {
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        priorityMode();
+                        //TODO priorityMode();
                     } else {
                         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     }
@@ -147,6 +147,11 @@ public class NMToggle extends IntentService {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        stop();
+    }
+
     public boolean haveNotificationAccess() {
         ContentResolver contentResolver = getContentResolver();
         String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
@@ -159,43 +164,48 @@ public class NMToggle extends IntentService {
     }
 
     private NLService nlService = null;
+    private boolean mBound = false;
 
     public void priorityMode() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && haveNotificationAccess()){
-            Intent i = new Intent(this, NLService.class);
-            final ServiceConnection mServerConn = new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder binder) {
-                    Log.d("SERVICE", "onServiceConnected");
-                    NLService.LocalBinder service = (NLService.LocalBinder) binder;
-                    nlService = service.getService();
-                    nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-                    Log.d("SERVICE", "onServiceDisconnected");
-                    nlService = null;
-                }
-            };
-            start(i, mServerConn);
-            if (nlService != null) {
-                Log.i("PRIORITY", "ENTRATO");
-                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
-            }
-            stop(i, mServerConn);
+            start();
         }
     }
 
-    public void start(Intent i, ServiceConnection mServerConn) {
-        bindService(i, mServerConn, Context.BIND_AUTO_CREATE);
-        startService(i);
+    public void start() {
+        Intent intent = new Intent(this, NLService.class);
+        startService(intent);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
-    public void stop(Intent i, ServiceConnection mServerConn) {
-        stopService(new Intent(this, NLService.class));
-        unbindService(mServerConn);
+    public void stop() {
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+            Log.i("PRIORITY", "BIND STOP BY FINISH");
+        }
     }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            NLService.LocalBinder binder = (NLService.LocalBinder) service;
+            nlService = binder.getService();
+            mBound = true;
+            Log.i("PRIORITY", "BIND START");
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
+            Log.i("PRIORITY", "FATTO");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+            Log.i("PRIORITY", "BIND STOP BY CONNECTION");
+        }
+    };
 
 
 }
