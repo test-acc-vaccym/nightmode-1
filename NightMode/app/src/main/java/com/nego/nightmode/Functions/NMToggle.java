@@ -111,14 +111,14 @@ public class NMToggle extends IntentService {
                     if (on) {
                         SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        //TODO priorityMode();
+                        // TODO priorityMode();
                     } else {
                         am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
                     }
                 } else {
                     if (on) {
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        //TODO priorityMode();
+                        // TODO priorityMode();
                     } else {
                         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     }
@@ -169,6 +169,10 @@ public class NMToggle extends IntentService {
     public void priorityMode() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && haveNotificationAccess()){
             start();
+            if (nlService != null) {
+                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
+                Log.i("PRIORITY", "FATTO");
+            }
         }
     }
 
@@ -195,9 +199,6 @@ public class NMToggle extends IntentService {
             nlService = binder.getService();
             mBound = true;
             Log.i("PRIORITY", "BIND START");
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
-            Log.i("PRIORITY", "FATTO");
         }
 
         @Override

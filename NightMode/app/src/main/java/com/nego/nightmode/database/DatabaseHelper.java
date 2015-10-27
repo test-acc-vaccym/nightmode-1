@@ -9,7 +9,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "alarmdb";
     public static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_CREATE_PEOPLE = "create table IF NOT EXISTS alarm (id integer primary key autoincrement, day integer default 0, start long default 0, end long default 0, pStart integer default 0, pEnd integer default 0);";
+    private static final String DATABASE_CREATE_PEOPLE = "create table IF NOT EXISTS alarm (id integer primary key autoincrement, day integer default 0, start long default 0, end long default 0);";
 
 
     public DatabaseHelper(Context context) {

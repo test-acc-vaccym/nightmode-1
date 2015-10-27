@@ -16,24 +16,18 @@ public class Alarm implements Parcelable {
     private int day;
     private long start;
     private long end;
-    private int pStart;
-    private int pEnd;
 
-    public Alarm(int id, int day, long start, long end, int pStart, int pEnd){
+    public Alarm(int id, int day, long start, long end){
         this.id = id;
         this.day = day;
         this.start = start;
         this.end = end;
-        this.pStart = pStart;
-        this.pEnd = pEnd;
     }
 
-    public Alarm(int day, long start, long end, int pStart, int pEnd){
+    public Alarm(int day, long start, long end){
         this.day = day;
         this.start = start;
         this.end = end;
-        this.pStart = pStart;
-        this.pEnd = pEnd;
     }
 
     public Alarm(Cursor cursor){
@@ -41,8 +35,6 @@ public class Alarm implements Parcelable {
         this.day = cursor.getInt(cursor.getColumnIndex(DbAdapter.KEY_DAY));
         this.start = cursor.getLong(cursor.getColumnIndex(DbAdapter.KEY_START));
         this.end = cursor.getLong(cursor.getColumnIndex(DbAdapter.KEY_END));
-        this.pStart = cursor.getInt(cursor.getColumnIndex(DbAdapter.KEY_PSTART));
-        this.pEnd = cursor.getInt(cursor.getColumnIndex(DbAdapter.KEY_PEND));
     }
 
     public int getId() {
@@ -55,22 +47,6 @@ public class Alarm implements Parcelable {
 
     public void setDay(int day) {
         this.day = day;
-    }
-
-    public int getpStart() {
-        return pStart;
-    }
-
-    public void setpStart(int pStart) {
-        this.pStart = pStart;
-    }
-
-    public int getpEnd() {
-        return pEnd;
-    }
-
-    public void setpEnd(int pEnd) {
-        this.pEnd = pEnd;
     }
 
     public long getStart() {
@@ -91,9 +67,10 @@ public class Alarm implements Parcelable {
 
     public boolean create_alarm(Context context, DbAdapter dbHelper) {
         delete_alarm(context, dbHelper);
-        pStart = AlarmF.addAlarm(context, this.id, this.start, Costants.ACTION_NIGHT_MODE_ON);
-        pEnd = AlarmF.addAlarm(context, this.id, this.end, Costants.ACTION_NIGHT_MODE_OFF);
-        if (dbHelper.createAlarm(this)) {
+        this.id = (int) dbHelper.createAlarm(this);
+        if (id > 0) {
+            AlarmF.addAlarm(context, this.id + 10000, this.start, Costants.ACTION_NIGHT_MODE_ON);
+            AlarmF.addAlarm(context, this.id, this.end, Costants.ACTION_NIGHT_MODE_OFF);
             return true;
         }
         return false;
@@ -101,7 +78,7 @@ public class Alarm implements Parcelable {
 
     public boolean delete_alarm(Context context, DbAdapter dbHelper) {
         if (dbHelper.deleteAlarm(this.getDay())) {
-            AlarmF.deleteAlarm(context, this.id);
+            AlarmF.deleteAlarm(context, this.id + 10000);
             AlarmF.deleteAlarm(context, this.id);
             return true;
         }
@@ -113,7 +90,7 @@ public class Alarm implements Parcelable {
 
     public static final Parcelable.Creator<Alarm> CREATOR = new Creator<Alarm>() {
         public Alarm createFromParcel(Parcel source) {
-            return new Alarm(source.readInt(), source.readInt(), source.readLong(), source.readLong(), source.readInt(), source.readInt());
+            return new Alarm(source.readInt(), source.readInt(), source.readLong(), source.readLong());
         }
         public Alarm[] newArray(int size) {
             return new Alarm[size];
@@ -131,7 +108,5 @@ public class Alarm implements Parcelable {
         dest.writeInt(day);
         dest.writeLong(start);
         dest.writeLong(end);
-        dest.writeInt(pStart);
-        dest.writeInt(pEnd);
     }
 }

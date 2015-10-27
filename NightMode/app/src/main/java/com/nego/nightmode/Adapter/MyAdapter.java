@@ -264,7 +264,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 mDataset.add(a);
             }
             if (mDataset.size() <= i) {
-                mDataset.add(new Alarm(i, 0, 0, 0, 0));
+                mDataset.add(new Alarm(i, 0, 0));
             }
             cursor.close();
         }

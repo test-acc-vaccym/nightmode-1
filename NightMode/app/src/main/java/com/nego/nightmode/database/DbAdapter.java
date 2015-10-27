@@ -24,8 +24,6 @@ public class DbAdapter {
     public static final String KEY_DAY = "day";
     public static final String KEY_START = "start";
     public static final String KEY_END = "end";
-    public static final String KEY_PSTART = "pStart";
-    public static final String KEY_PEND = "pEnd";
 
     public DbAdapter(Context context) {
         this.context = context;
@@ -45,20 +43,18 @@ public class DbAdapter {
         dbHelper.close();
     }
 
-    private ContentValues createContentValues(int day, long start, long end, int pStart, int pEnd) {
+    private ContentValues createContentValues(int day, long start, long end) {
         ContentValues values = new ContentValues();
         values.put(KEY_DAY, day);
         values.put(KEY_START, start);
         values.put(KEY_END, end);
-        values.put(KEY_PSTART, pStart);
-        values.put(KEY_PEND, pEnd);
 
         return values;
     }
 
-    public boolean createAlarm(Alarm a) {
-        ContentValues initialValues = createContentValues(a.getDay(), a.getStart(), a.getEnd(), a.getpStart(), a.getpEnd());
-        return database.insertOrThrow(DATABASE_TABLE_PEOPLE, null, initialValues) > 0;
+    public long createAlarm(Alarm a) {
+        ContentValues initialValues = createContentValues(a.getDay(), a.getStart(), a.getEnd());
+        return database.insertOrThrow(DATABASE_TABLE_PEOPLE, null, initialValues);
     }
 
     public boolean deleteAlarm(int day) {
@@ -67,12 +63,12 @@ public class DbAdapter {
 
 
     public Cursor fetchAllAlarms() {
-        return database.query(DATABASE_TABLE_PEOPLE, new String[]{KEY_ID, KEY_DAY, KEY_START, KEY_END, KEY_PSTART, KEY_PEND}, null, null, null, null, null);
+        return database.query(DATABASE_TABLE_PEOPLE, new String[]{KEY_ID, KEY_DAY, KEY_START, KEY_END}, null, null, null, null, null);
     }
 
     public Cursor getAlarmByDay(int day) {
         Cursor mCursor = database.query(true, DATABASE_TABLE_PEOPLE, new String[]{
-                        KEY_ID, KEY_DAY, KEY_START, KEY_END, KEY_PSTART, KEY_PEND},
+                        KEY_ID, KEY_DAY, KEY_START, KEY_END},
                 KEY_DAY + " == " + day, null, null, null, null, null);
 
         return mCursor;

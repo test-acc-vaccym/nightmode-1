@@ -16,7 +16,7 @@ import java.util.Calendar;
 public class AlarmF {
 
 
-    public static int addAlarm(Context context, int id, long time, String todo) {
+    public static void addAlarm(Context context, int id, long time, String todo) {
 
         AlarmManager alarmMgr=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent=new Intent(context, AlarmReceiver.class);
@@ -25,14 +25,10 @@ public class AlarmF {
         PendingIntent alarmIntent= PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (Build.VERSION.SDK_INT >= 19)
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, AlarmManager.INTERVAL_DAY * 7, time, alarmIntent);
+            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
         else if (Build.VERSION.SDK_INT >= 15)
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
-
-        // TODO resolve pending id
-        Log.i("created alarm", id + " " + time);
-        Log.i("created alarm when", Utils.getDate(context, time));
-        return id;
+        Log.i("ID CREATE", id + " - " + Utils.getDate(context, time));
     }
 
     public static void deleteAlarm(Context context, int id) {
@@ -41,6 +37,6 @@ public class AlarmF {
         intent.setAction(Costants.ALARM_ACTION);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_NO_CREATE);
         manager.cancel(alarmIntent);
-        Log.i("deleted alarm", "" + id);
+        Log.i("ID DELETE", "" + id);
     }
 }
