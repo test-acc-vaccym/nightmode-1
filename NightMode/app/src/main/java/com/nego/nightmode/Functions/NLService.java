@@ -37,17 +37,6 @@ public class NLService extends NotificationListenerService {
         registerReceiver(nlservicereciver, filter);
     }
 
-    private final IBinder mBinder = new LocalBinder();
-    public class LocalBinder extends Binder {
-        NLService getService() {
-            return NLService.this;
-        }
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
-    }
 
     @Override
     public void onDestroy() {
@@ -57,6 +46,11 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+
+        Intent i = new  Intent(Costants.ACTION_NOTIFICATION_LISTENER_SERVICE);
+        i.putExtra(Costants.NOTIFICATION_PACKAGE, sbn.getPackageName());
+        sendBroadcast(i);
+
     }
 
     @Override
@@ -68,7 +62,10 @@ public class NLService extends NotificationListenerService {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Costants.ACTION_NOTIFICATION_LISTENER_SERVICE)) {
-
+                SharedPreferences SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
+                if (getPackageName().equals(intent.getStringExtra(Costants.NOTIFICATION_PACKAGE)) && SP.getBoolean(Costants.PREFERENCES_PRIORITY_MODE, true)) {
+                    requestInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
+                }
             }
         }
     }

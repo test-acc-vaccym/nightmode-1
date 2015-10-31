@@ -10,8 +10,7 @@ public class Costants {
     public static final String ACTION_NIGHT_MODE_TOGGLE = "android.intent.action.ACTION_NIGHT_MODE_TOGGLE";
     public static final String PREFERENCES_WIFI = "PREFERENCES_WIFI";
     public static final String PREFERENCES_BLUETOOTH = "PREFERENCES_BLUETOOTH";
-    public static final String PREFERENCES_BRIGHTNESS = "PREFERENCES_BRIGHTNESS";
-    public static final String PREFERENCES_BRIGHTNESS_LEVEL = "PREFERENCES_BRIGHTNESS_LEVEL";
+    public static final String PREFERENCES_PRIORITY_MODE = "PREFERENCES_PRIORITY_MODE";
     public static final String PREFERENCES_ALARM_SOUND = "PREFERENCES_ALARM_SOUND";
     public static final String PREFERENCES_ALARM_SOUND_LEVEL = "PREFERENCES_ALARM_SOUND_LEVEL";
     public static final String PREFERENCES_DO_NOT_DISTURB = "PREFERENCES_DO_NOT_DISTURB";
@@ -19,8 +18,6 @@ public class Costants {
     public static final String PREFERENCES_REMEMBER_OLD = "PREFERENCES_REMEMBER_OLD";
     public static final String PREFERENCES_WIFI_OLD = "PREFERENCES_WIFI_OLD";
     public static final String PREFERENCES_BLUETOOTH_OLD = "PREFERENCES_BLUETOOTH_OLD";
-    public static final String PREFERENCES_BRIGHTNESS_OLD = "PREFERENCES_BRIGHTNESS_OLD";
-    public static final String PREFERENCES_BRIGHTNESS_LEVEL_OLD = "PREFERENCES_BRIGHTNESS_LEVEL_OLD";
     public static final String PREFERENCES_ALARM_SOUND_OLD = "PREFERENCES_ALARM_SOUND_OLD";
     public static final String PREFERENCES_DO_NOT_DISTURB_OLD = "PREFERENCES_DO_NOT_DISTURB_OLD";
     public static final String PREFERENCES_NOTIFICATION = "PREFERENCES_NOTIFICATION";
@@ -30,6 +27,7 @@ public class Costants {
     public static final String ACTION_PAIR_NFC = "android.intent.action.PAIR_NFC";
 
     public static final String PREFERENCES_FIRST_TOUR = "PREFERENCES_FIRST_TOUR";
+    public static final String NOTIFICATION_PACKAGE = "NOTIFICATION_PACKAGE";
 
 
     public static final String ALARM_ACTION = "android.intent.action.ALARM";

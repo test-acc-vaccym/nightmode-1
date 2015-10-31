@@ -73,4 +73,8 @@
     <string name="text_on">on</string>
     <string name="text_ask_reset_nfc">Are you sure to reset nfc tag id?</string>
     <string name="text_ask_update_nfc">Are you sure to update nfc tag id and lose the old one?</string>
+    <string name="title_priority_preferences">Priority Mode</string>
+    <string name="action_grant_notificationaccess">Grant notification access to set priority mode when night mode is activated</string>
+    <string name="subtitle_priority_preferences">Switch to priority mode from only allarm when night mode is activated</string>
+    <string name="active_notification">Active "Turn off Night Mode" notification</string>
 </resources>

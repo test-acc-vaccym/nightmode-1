@@ -111,14 +111,12 @@ public class NMToggle extends IntentService {
                     if (on) {
                         SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        // TODO priorityMode();
                     } else {
                         am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
                     }
                 } else {
                     if (on) {
                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        // TODO priorityMode();
                     } else {
                         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     }
@@ -146,67 +144,5 @@ public class NMToggle extends IntentService {
             }
         }
     }
-
-    @Override
-    public void onDestroy() {
-        stop();
-    }
-
-    public boolean haveNotificationAccess() {
-        ContentResolver contentResolver = getContentResolver();
-        String enabledNotificationListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
-        String packageName = getPackageName();
-
-        if (enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName))
-            return false;
-        else
-            return true;
-    }
-
-    private NLService nlService = null;
-    private boolean mBound = false;
-
-    public void priorityMode() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && haveNotificationAccess()){
-            start();
-            if (nlService != null) {
-                nlService.requestInterruptionFilter(NotificationListenerService.INTERRUPTION_FILTER_PRIORITY);
-                Log.i("PRIORITY", "FATTO");
-            }
-        }
-    }
-
-    public void start() {
-        Intent intent = new Intent(this, NLService.class);
-        startService(intent);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    public void stop() {
-        if (mBound) {
-            unbindService(mConnection);
-            mBound = false;
-            Log.i("PRIORITY", "BIND STOP BY FINISH");
-        }
-    }
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            NLService.LocalBinder binder = (NLService.LocalBinder) service;
-            nlService = binder.getService();
-            mBound = true;
-            Log.i("PRIORITY", "BIND START");
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            mBound = false;
-            Log.i("PRIORITY", "BIND STOP BY CONNECTION");
-        }
-    };
-
 
 }

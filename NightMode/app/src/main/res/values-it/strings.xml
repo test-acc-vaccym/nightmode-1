@@ -74,4 +74,8 @@
     <string name="text_ask_update_nfc">Sei sicuro di voler modificare il tag nfc salvato?</string>
     <string name="text_request_dev">Concedi a questa applicazione di poter spegnere lo schermo come amministratore di sistema</string>
     <string name="subtitle_silent_preferences">Passa alla modalità silenziosa quando attivi la modalità notte</string>
+    <string name="title_priority_preferences">Modalità Priorità</string>
+    <string name="action_grant_notificationaccess">Concedi a questa applicazione l\'accesso alle notifiche per attivare la modalità priorità</string>
+    <string name="active_notification">Attiva la notifica "Disattiva Modalità Notte"</string>
+    <string name="subtitle_priority_preferences">Passa alla modalità priorità da quella solo allarmi quando la modalità notte è attiva</string>
 </resources>

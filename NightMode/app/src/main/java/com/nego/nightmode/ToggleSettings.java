@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.*;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -138,7 +141,7 @@ public class ToggleSettings extends AppCompatActivity {
             }
         });
 
-        // SCREEN OFF
+        // PRIORITY MODE AND SCREEN OFF
         updateUi();
     }
 
@@ -181,6 +184,50 @@ public class ToggleSettings extends AppCompatActivity {
                 }
             });
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            final CheckBox pC = (CheckBox) findViewById(R.id.priority_check);
+            if (haveNotificationAccess()) {
+                if (SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true)) {
+                    ((TextView) findViewById(R.id.priority_subtitle)).setText(R.string.subtitle_priority_preferences);
+                    pC.setVisibility(View.VISIBLE);
+                    pC.setChecked(SP.getBoolean(Costants.PREFERENCES_PRIORITY_MODE, true));
+                    pC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            SP.edit().putBoolean(Costants.PREFERENCES_PRIORITY_MODE, isChecked).apply();
+                        }
+                    });
+                    findViewById(R.id.action_priority).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            pC.setChecked(!pC.isChecked());
+                        }
+                    });
+                } else {
+                    pC.setVisibility(View.GONE);
+                    ((TextView) findViewById(R.id.priority_subtitle)).setText(R.string.active_notification);
+                    findViewById(R.id.action_priority).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onBackPressed();
+                        }
+                    });
+                }
+            } else {
+                pC.setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.priority_subtitle)).setText(R.string.action_grant_notificationaccess);
+                findViewById(R.id.action_priority).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                        startActivity(intent);
+                    }
+                });
+            }
+        } else {
+            findViewById(R.id.container_priority).setVisibility(View.GONE);
+        }
     }
 
     public boolean checkAdmin() {
@@ -192,5 +239,16 @@ public class ToggleSettings extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+    public boolean haveNotificationAccess() {
+        ContentResolver contentResolver = getContentResolver();
+        String enabledNotificationListeners = android.provider.Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
+        String packageName = getPackageName();
+
+        if (enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName))
+            return false;
+        else
+            return true;
     }
 }
