@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.nego.nightmode.Alarm;
 import com.nego.nightmode.Costants;
@@ -22,9 +23,6 @@ public class BootReceiver extends BroadcastReceiver {
             SharedPreferences SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
             Utils.showNotification(context, SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
 
-        }
-
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             DbAdapter dbHelper = new DbAdapter(context);
             dbHelper.open();
             Cursor c = dbHelper.fetchAllAlarms();

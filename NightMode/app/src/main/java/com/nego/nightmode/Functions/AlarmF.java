@@ -18,17 +18,19 @@ public class AlarmF {
 
     public static void addAlarm(Context context, int id, long time, String todo) {
 
-        AlarmManager alarmMgr=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent=new Intent(context, AlarmReceiver.class);
-        intent.setAction(Costants.ALARM_ACTION);
-        intent.putExtra(Costants.ALARM_EXTRA_ACTION, todo);
-        PendingIntent alarmIntent= PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (time != 0) {
 
-        if (Build.VERSION.SDK_INT >= 19)
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
-        else if (Build.VERSION.SDK_INT >= 15)
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
-        Log.i("ID CREATE", id + " - " + Utils.getDate(context, time));
+            AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.setAction(Costants.ALARM_ACTION);
+            intent.putExtra(Costants.ALARM_EXTRA_ACTION, todo);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            if (Build.VERSION.SDK_INT >= 19)
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
+            else if (Build.VERSION.SDK_INT >= 15)
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY * 7, alarmIntent);
+        }
     }
 
     public static void deleteAlarm(Context context, int id) {
@@ -37,6 +39,5 @@ public class AlarmF {
         intent.setAction(Costants.ALARM_ACTION);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_NO_CREATE);
         manager.cancel(alarmIntent);
-        Log.i("ID DELETE", "" + id);
     }
 }
