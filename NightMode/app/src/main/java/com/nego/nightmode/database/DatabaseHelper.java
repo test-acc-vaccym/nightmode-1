@@ -4,12 +4,21 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.nego.nightmode.Costants;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "alarmdb";
     public static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_CREATE_PEOPLE = "create table IF NOT EXISTS alarm (id integer primary key autoincrement, day integer default 0, start long default 0, end long default 0);";
+    private static final String DATABASE_CREATE_ALARM = "create table IF NOT EXISTS alarm (id integer primary key autoincrement, day integer default 0, start long default 0, end long default 0);";
+    private static final String DATABASE_CREATE_MODE = "create table IF NOT EXISTS mode (id integer primary key autoincrement, name text default '', icon text default '', color text default '', def text default '', isDefault integer default 0, notification integer default 0, nfc text default '', wifi integer default 1, bluetooth integer default 0, alarm_sound integer default 0, alarm_level integer default 5, do_no_disturb integer default 0, priority_mode integer default 0, screen_off integer default 0, last_activation long default 0);";
+    private static final String DATABASE_CREATE_DEFAULT_MODES_DAY = "INSERT IGNORE INTO mode " +
+            "(id, name, icon, color, def, isDefault, notification, nfc, wifi, bluetooth, alarm_sound, alarm_level, do_no_disturb, priority_mode, screen_off, last_activation) " +
+            "VALUES (1, " + Costants.DEFAULT_MODE_DAY + ", " + Costants.DEFAULT_MODE_DAY + "," + Costants.DEFAULT_MODE_DAY + "," + Costants.DEFAULT_MODE_DAY + ", 1, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);";
+    private static final String DATABASE_CREATE_DEFAULT_MODES_NIGHT = "INSERT IGNORE INTO mode " +
+            "(id, name, icon, color, def, isDefault, notification, nfc, wifi, bluetooth, alarm_sound, alarm_level, do_no_disturb, priority_mode, screen_off, last_activation) " +
+            "VALUES (2, " + Costants.DEFAULT_MODE_NIGHT + ", " + Costants.DEFAULT_MODE_NIGHT + "," + Costants.DEFAULT_MODE_NIGHT + "," + Costants.DEFAULT_MODE_NIGHT + ", 1, 1, '', 1, 1, 1, 5, 1, 0, 0, 0);";
 
 
     public DatabaseHelper(Context context) {
@@ -18,7 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL(DATABASE_CREATE_PEOPLE);
+        database.execSQL(DATABASE_CREATE_ALARM);
+        database.execSQL(DATABASE_CREATE_MODE);
+        database.execSQL(DATABASE_CREATE_DEFAULT_MODES_DAY);
+        database.execSQL(DATABASE_CREATE_DEFAULT_MODES_NIGHT);
     }
 
     @Override

@@ -53,6 +53,9 @@ public class Main extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
+
+
+
         button = (ImageView) findViewById(R.id.button_center);
         button_title = (Button) findViewById(R.id.button_title);
         ui_enabled = (TextView) findViewById(R.id.app_isenabled);
