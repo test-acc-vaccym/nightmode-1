@@ -38,7 +38,8 @@ public class Costants {
 
     public static final String ACTION_NOTIFICATION_LISTENER_SERVICE = "android.intent.action.NOTIFICATION_LISTENER_SERVICE";
 
-    public static final String DEFAULT_MODE_DAY = "DEFAULT_MODE_NIGHT";
+    public static final String UPDATED_TO_MODE = "UPDATED_TO_MODE";
+    public static final String DEFAULT_MODE_DAY = "DEFAULT_MODE_DAY";
     public static final String DEFAULT_MODE_NIGHT = "DEFAULT_MODE_NIGHT";
     public static final String DEFAULT_MODE_CHARGE = "DEFAULT_MODE_CHARGE";
 

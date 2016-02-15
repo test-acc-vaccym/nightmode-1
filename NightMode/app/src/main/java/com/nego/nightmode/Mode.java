@@ -256,6 +256,22 @@ public class Mode implements Parcelable {
         return wifi;
     }
 
+    public boolean insert(DbAdapter dbAdapter) {
+        return dbAdapter.createMode(this) > 0;
+    }
+
+    public boolean insertDefault(DbAdapter dbAdapter) {
+        return dbAdapter.createDefaultMode(this) > 0;
+    }
+
+    public boolean update(DbAdapter dbAdapter) {
+        return dbAdapter.updateMode(this);
+    }
+
+    public boolean delete(DbAdapter dbAdapter) {
+        return dbAdapter.deleteMode(id);
+    }
+
 
     // PARCELIZZAZIONE
 

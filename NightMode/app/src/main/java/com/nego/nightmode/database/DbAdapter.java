@@ -147,6 +147,11 @@ public class DbAdapter {
         return database.insertOrThrow(DATABASE_TABLE_MODE, null, initialValues);
     }
 
+    public long createDefaultMode(Mode m) {
+        ContentValues initialValues = createModeValues(m.getId(), m.getName(), m.getIcon(), m.getColor(), m.getDef(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
+        return database.insertOrThrow(DATABASE_TABLE_MODE, null, initialValues);
+    }
+
     public boolean updateMode(Mode m) {
         ContentValues updateValues = createModeValues(m.getId(), m.getName(), m.getIcon(), m.getColor(), m.getDef(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
         return database.update(DATABASE_TABLE_MODE, updateValues, KEY_MODE_ID + "==" + m.getId(), null) > 0;
@@ -157,13 +162,17 @@ public class DbAdapter {
     }
 
     public Cursor fetchAllModes() {
-        return database.query(DATABASE_TABLE_MODE, new String[]{KEY_MODE_ID, },null, null, null, null, null);
+        return database.query(DATABASE_TABLE_MODE, new String[]{KEY_MODE_ID, KEY_MODE_NAME, KEY_MODE_ICON, KEY_MODE_COLOR, KEY_MODE_DEF, KEY_MODE_IS_DEFAULT, KEY_MODE_NOTIFICATION, KEY_MODE_NFC, KEY_MODE_WIFI, KEY_MODE_BLUETOOTH, KEY_MODE_ALARM_SOUND, KEY_MODE_ALARM_LEVEL, KEY_MODE_DO_NOT_DISTURB, KEY_MODE_PRIORITY_MODE, KEY_MODE_SCREEN_OFF, KEY_MODE_LAST_ACTIVATION},null, null, null, null, null);
     }
 
     public Cursor getModeById(int id) {
         return database.query(true, DATABASE_TABLE_MODE, new String[]{
                         KEY_MODE_ID, },
                 KEY_MODE_ID + " == '" + id + "'", null, null, null, null, null);
+    }
+
+    public boolean deleteDirtyData() {
+        return database.delete(DATABASE_TABLE_MODE, null, null) > 0;
     }
 
 

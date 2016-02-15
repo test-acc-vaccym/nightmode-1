@@ -54,6 +54,9 @@ public class Main extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("");
 
+        SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
+        if (!Utils.updateToMode(this, SP))
+            Log.i("NEGO_M", "Errore");
 
 
         button = (ImageView) findViewById(R.id.button_center);
@@ -61,8 +64,6 @@ public class Main extends AppCompatActivity {
         ui_enabled = (TextView) findViewById(R.id.app_isenabled);
         ui_start_time = (TextView) findViewById(R.id.start_time);
 
-        SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-        SP.edit().remove(Costants.PREFERENCES_START_TIME).apply();
 
         createUI(SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
         button_title.setOnClickListener(new View.OnClickListener() {
