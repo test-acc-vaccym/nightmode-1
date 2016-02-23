@@ -15,12 +15,15 @@ import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
 import android.nfc.tech.NfcA;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -34,8 +37,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nego.nightmode.Adapter.mAdapterMode;
 import com.nego.nightmode.Functions.NLService;
 import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.database.DbAdapter;
 
 public class Main extends AppCompatActivity {
 
@@ -46,19 +51,29 @@ public class Main extends AppCompatActivity {
     private TextView ui_start_time;
     private Button button_title;
 
+    private RecyclerView recList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("");
+        setTitle(getString(R.string.app_name));
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-        if (!Utils.updateToMode(this, SP))
-            Log.i("NEGO_M", "Errore");
+        if (Utils.updateToMode(this, SP)) {
+            // TODO start Tutorial update
+        }
 
+        // RECYCLER LIST
+        recList = (RecyclerView) findViewById(R.id.listView);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
 
+/*
         button = (ImageView) findViewById(R.id.button_center);
         button_title = (Button) findViewById(R.id.button_title);
         ui_enabled = (TextView) findViewById(R.id.app_isenabled);
@@ -85,7 +100,11 @@ public class Main extends AppCompatActivity {
             public void onClick(View v) {
                 startActivityForResult(new Intent(Main.this, About.class), 1);
             }
-        });
+        });*/
+
+
+
+        updateUI();
 
     }
 
@@ -98,7 +117,7 @@ public class Main extends AppCompatActivity {
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                updateUI(SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
+                updateUI();
             }
         };
         registerReceiver(mReceiver, intentFilter);
@@ -117,7 +136,8 @@ public class Main extends AppCompatActivity {
         ui_start_time.setText(getString(activated ? R.string.start_time_enabled : R.string.start_time_disabled, Utils.getDate(this, SP.getLong(Costants.PREFERENCES_START_TIME, 0))));
     }
 
-    public void updateUI(final boolean activated) {
+    public void updateUI() {
+        /*
         final View myView = findViewById(R.id.rect_colored);
         myView.animate()
                 .setInterpolator(new AccelerateDecelerateInterpolator())
@@ -163,10 +183,30 @@ public class Main extends AppCompatActivity {
 
                     }
                 }).start();
+                */
+
+        recList.animate().alpha(0).start();
+
+        final Handler mHandler = new Handler();
+
+        new Thread(new Runnable() {
+            public void run() {
+                DbAdapter dbHelper = new DbAdapter(Main.this);
+                dbHelper.open();
+                final mAdapterMode mAdapter = new mAdapterMode(dbHelper, Main.this);
+                dbHelper.close();
+
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        recList.setAdapter(mAdapter);
+                        recList.animate().alpha(1).start();
+                    }
+                });
+            }
+        }).start();
     }
 
     public void switchNightMode(boolean activated) {
         NMToggle.startAction(this, activated ? Costants.ACTION_NIGHT_MODE_ON : Costants.ACTION_NIGHT_MODE_OFF);
     }
-
 }

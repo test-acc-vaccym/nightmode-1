@@ -77,14 +77,6 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        // TOGGLE MENU
-        findViewById(R.id.action_choose_toggle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Settings.this, ToggleSettings.class));
-            }
-        });
-
         // AUTOMATIC RULES
         findViewById(R.id.action_auto).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +86,7 @@ public class Settings extends AppCompatActivity {
         });
 
         // NFC
+        /* TODO NFC
         NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
         if (adapter == null) {
@@ -117,7 +110,7 @@ public class Settings extends AppCompatActivity {
                     }
                 });
             }
-        }
+        }*/
     }
 
 

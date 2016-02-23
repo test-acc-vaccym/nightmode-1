@@ -1,7 +1,7 @@
 <resources>
 
     <!-- MAIN THEME -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlActivated">@color/primary_light</item>
         <item name="colorSwitchThumbNormal">@color/primary_dark</item>
 
@@ -23,7 +23,7 @@
     </style>
 
 
-    <style name="MyDialog_theme" parent="Theme.AppCompat.NoActionBar">
+    <style name="MyDialog_theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -33,13 +33,13 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="Dialog_Pop" parent="Theme.AppCompat.Dialog">
+    <style name="Dialog_Pop" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorControlActivated">@color/primary_dark</item>
         <item name="colorSwitchThumbNormal">@color/back_selected_item</item>
 
     </style>
 
-    <style name="mDialog" parent="Theme.AppCompat.Dialog">
+    <style name="mDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorControlActivated">@color/primary_light</item>
         <item name="colorSwitchThumbNormal">@color/back_selected_item</item>
         <item name="colorAccent">@color/primary</item>
@@ -55,6 +55,7 @@
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- SETTINGS THEME -->

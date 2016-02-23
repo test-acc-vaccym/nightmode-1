@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nego.nightmode" >
+    package="com.nego.nightmode">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -16,11 +16,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,7 @@
             android:name=".Settings"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Main"
-            android:theme="@style/AppTheme.Settings" >
+            android:theme="@style/AppTheme.Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
@@ -40,7 +40,7 @@
             android:name=".ToggleSettings"
             android:label="@string/title_sections_toggle_preferences"
             android:parentActivityName=".Settings"
-            android:theme="@style/AppTheme.Settings" >
+            android:theme="@style/AppTheme.Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Settings" />
@@ -48,22 +48,21 @@
 
         <service
             android:name=".Functions.NMToggle"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
-        <receiver android:name=".Receiver.BootReceiver" >
+        <receiver android:name=".Receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver.StatusChanged" >
+        <receiver android:name=".Receiver.StatusChanged">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_NIGHT_MODE_OFF" />
                 <action android:name="android.intent.action.ACTION_NIGHT_MODE_ON" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Receiver.AlarmReceiver" >
+        <receiver android:name=".Receiver.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ALARM" />
             </intent-filter>
@@ -72,7 +71,7 @@
         <activity
             android:name=".Receiver.ShortcutReceiver"
             android:label="@string/app_name"
-            android:theme="@style/MyDialog_theme" >
+            android:theme="@style/MyDialog_theme">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
@@ -83,13 +82,13 @@
             android:name=".About"
             android:label="@string/title_activity_about"
             android:parentActivityName=".Main"
-            android:theme="@style/AppTheme.Settings" >
+            android:theme="@style/AppTheme.Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Main" />
         </activity>
 
-        <receiver android:name=".Widget.NightModeToggle" >
+        <receiver android:name=".Widget.NightModeToggle">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -103,17 +102,17 @@
             android:name=".Rules"
             android:label="@string/title_activity_rules"
             android:parentActivityName=".Settings"
-            android:theme="@style/AppTheme.Settings" >
+            android:theme="@style/AppTheme.Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nego.nightmode.Settings" />
         </activity>
         <activity
             android:name=".Receiver.NfcReceiver"
+            android:excludeFromRecents="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/MyDialog_theme"
-            android:excludeFromRecents="true">
+            android:theme="@style/MyDialog_theme">
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
@@ -126,19 +125,18 @@
         <service
             android:name=".Functions.NLService"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
         <service
             android:name=".Functions.AlarmService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
         <receiver
             android:name=".Receiver.DeviceAdminReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />

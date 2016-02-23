@@ -2,7 +2,7 @@
 <resources>
 
     <!-- MAIN THEME -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/accent</item>
@@ -15,13 +15,8 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
         <item name="colorAccent">@color/accent</item>
-
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:colorControlActivated">@color/primary_soft</item>
     </style>
 
 
@@ -36,7 +31,7 @@
         <item name="android:popupTheme">@style/ThemeOverlay.AppCompat</item>
     </style>
 
-    <style name="MyDialog_theme" parent="Theme.AppCompat.NoActionBar">
+    <style name="MyDialog_theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -48,7 +43,7 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Dialog_Pop" parent="Theme.AppCompat.Dialog">
+    <style name="Dialog_Pop" parent="Theme.AppCompat.Light.Dialog">
 
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
@@ -58,7 +53,7 @@
 
     </style>
 
-    <style name="mDialog" parent="Theme.AppCompat.Dialog">
+    <style name="mDialog" parent="Theme.AppCompat.Light.Dialog">
 
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
@@ -93,6 +88,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
@@ -110,10 +106,5 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
-        <item name="colorAccent">@color/accent</item>
     </style>
 </resources>

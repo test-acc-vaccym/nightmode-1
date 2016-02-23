@@ -33,34 +33,6 @@
             android:padding="16dp"
             android:background="@drawable/list_item_background_card"
             android:clickable="true"
-            android:id="@+id/action_choose_toggle">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title_choose_toggle_preferences"
-                android:id="@+id/choose_toggle_title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary_text"
-                android:id="@+id/choose_toggle_subtitle"
-                android:text="@string/subtitle_choose_toggle_preferences"
-                android:layout_below="@+id/choose_toggle_title" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/back_select"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/list_item_background_card"
-            android:clickable="true"
             android:id="@+id/action_remember_old">
             <TextView
                 android:layout_width="match_parent"
@@ -174,41 +146,6 @@
                 android:text="@string/subtitle_auto_preferences"
                 android:layout_below="@+id/auto_title" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/nfcOk">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/back_select"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:background="@drawable/list_item_background_card"
-                android:clickable="true"
-                android:id="@+id/action_nfc">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/primary_text"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/title_nfc_preferences"
-                    android:id="@+id/nfc_title" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
-                    android:id="@+id/nfc_subtitle"
-                    android:text="@string/subtitle_nfc_preferences"
-                    android:layout_below="@+id/nfc_title" />
-            </RelativeLayout>
-        </LinearLayout>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

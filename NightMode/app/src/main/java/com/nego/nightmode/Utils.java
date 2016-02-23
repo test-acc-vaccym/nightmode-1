@@ -68,11 +68,11 @@ public class Utils {
             if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR) &&
                     today.get(Calendar.MONTH) == byR.get(Calendar.MONTH) &&
                     today.get(Calendar.DAY_OF_MONTH) == byR.get(Calendar.DAY_OF_MONTH)) {
-                return " " + context.getString(R.string.text_at) + " " + HM.format(new Date(byR.getTimeInMillis()));
+                return context.getString(R.string.text_at) + " " + HM.format(new Date(byR.getTimeInMillis()));
             } else if (today.get(Calendar.YEAR) == byR.get(Calendar.YEAR)) {
-                return " " + context.getString(R.string.text_on) + " " + DM.format(new Date(byR.getTimeInMillis()));
+                return context.getString(R.string.text_on) + " " + DM.format(new Date(byR.getTimeInMillis()));
             } else {
-                return " " + context.getString(R.string.text_on) + " " + MY.format(new Date(byR.getTimeInMillis()));
+                return context.getString(R.string.text_on) + " " + MY.format(new Date(byR.getTimeInMillis()));
             }
         }
     }
@@ -127,8 +127,29 @@ public class Utils {
                 return false;
             dbHelper.close();
             SP.edit().putBoolean(Costants.UPDATED_TO_MODE, true).apply();
-            // TODO start Tutorial update
         }
         return true;
+    }
+
+    public static String getModeName(Context context, String name) {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return "Day";
+            case Costants.DEFAULT_MODE_NIGHT:
+                return context.getString(R.string.app_name);
+            default:
+                return name;
+        }
+    }
+
+    public static int getModeIcon(String name) {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.drawable.sun;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.drawable.ic_action_night;
+            default:
+                return 0;
+        }
     }
 }
