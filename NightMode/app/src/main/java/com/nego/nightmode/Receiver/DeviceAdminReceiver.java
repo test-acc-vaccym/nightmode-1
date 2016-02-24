@@ -29,8 +29,6 @@ public class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
     @Override
     public void onDisabled(Context context, Intent intent) {
         Log.i("DEVADMIN", "DISABLED");
-        SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-        SP.edit().putBoolean(Costants.PREFERENCES_SCREEN_OFF, false).apply();
     }
 
     @Override

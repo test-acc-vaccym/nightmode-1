@@ -207,6 +207,6 @@ public class Main extends AppCompatActivity {
     }
 
     public void switchNightMode(boolean activated) {
-        NMToggle.startAction(this, activated ? Costants.ACTION_NIGHT_MODE_ON : Costants.ACTION_NIGHT_MODE_OFF);
+        //NMToggle.startAction(this, activated ? Costants.ACTION_NIGHT_MODE_ON : Costants.ACTION_NIGHT_MODE_OFF);
     }
 }

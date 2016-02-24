@@ -15,7 +15,7 @@ public class ShortcutReceiver extends Activity {
 
         if (getIntent().getAction().equals("android.intent.action.CREATE_SHORTCUT")) {
             Intent shortcutIntent = new Intent(getApplicationContext(), ShortcutReceiver.class);
-            shortcutIntent.setAction(Costants.ACTION_NIGHT_MODE_TOGGLE);
+            shortcutIntent.setAction(Costants.ACTION_NIGHT_MODE_OFF);
             shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -31,7 +31,7 @@ public class ShortcutReceiver extends Activity {
 
         if (getIntent().getAction().equals(Costants.ACTION_NIGHT_MODE_TOGGLE)) {
             SharedPreferences SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-            NMToggle.startAction(this,SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false) ? Costants.ACTION_NIGHT_MODE_OFF : Costants.ACTION_NIGHT_MODE_ON);
+            // TODO NMToggle.startAction(this, ); Creare Popup
             finish();
         }
 

@@ -43,4 +43,7 @@ public class Costants {
     public static final String DEFAULT_MODE_NIGHT = "DEFAULT_MODE_NIGHT";
     public static final String DEFAULT_MODE_CHARGE = "DEFAULT_MODE_CHARGE";
 
+    public static final String MODE_EXTRA = "MODE_EXTRA";
+    public static final String ACTUAL_MODE = "ACTUAL_MODE";
+
 }

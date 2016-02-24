@@ -171,6 +171,12 @@ public class DbAdapter {
                 KEY_MODE_ID + " == '" + id + "'", null, null, null, null, null);
     }
 
+    public Cursor getModeByName(String name) {
+        return database.query(true, DATABASE_TABLE_MODE, new String[]{
+                        KEY_MODE_ID, },
+                KEY_MODE_NAME + " == '" + name + "'", null, null, null, null, null);
+    }
+
     public boolean deleteDirtyData() {
         return database.delete(DATABASE_TABLE_MODE, null, null) > 0;
     }

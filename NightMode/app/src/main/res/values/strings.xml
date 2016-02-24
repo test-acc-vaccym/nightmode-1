@@ -13,9 +13,9 @@
     <string name="subtitle_silent_preferences">Switch on do not disturb mode when night mode is on</string>
     <string name="title_sections_style">Style Preferences</string>
     <string name="title_sections_toggles">Main Toggles</string>
-    <string name="app_name_enabled">Night Mode Enabled</string>
-    <string name="app_name_disabled">Night Mode Disabled</string>
-    <string name="action_disabled_night_mode">Click here to disabled night mode</string>
+    <string name="app_name_enabled">%s Mode Enabled</string>
+    <string name="app_name_disabled">%s Mode Disabled</string>
+    <string name="action_disabled_night_mode">Click here to disabled %s mode</string>
     <string name="title_sections_toggle_preferences">Toggle Preferences</string>
     <string name="title_remember_old_preferences">Remember Status</string>
     <string name="subtitle_remember_old_preferences">Remember old toggle status</string>

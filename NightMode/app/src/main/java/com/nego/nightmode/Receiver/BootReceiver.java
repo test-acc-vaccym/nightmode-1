@@ -22,7 +22,7 @@ public class BootReceiver extends BroadcastReceiver {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals("android.intent.action.MY_PACKAGE_REPLACED")) {
             SharedPreferences SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
             Utils.updateToMode(context, SP);
-            Utils.showNotification(context, SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false));
+            Utils.showNotification(context, Utils.getActualMode(context));
 
             DbAdapter dbHelper = new DbAdapter(context);
             dbHelper.open();

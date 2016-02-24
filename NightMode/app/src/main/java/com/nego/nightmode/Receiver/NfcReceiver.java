@@ -42,7 +42,7 @@ public class NfcReceiver extends AppCompatActivity {
             Log.i("NFC", "TECH");
             String id = Utils.ByteArrayToHexString(getIntent().getByteArrayExtra(NfcAdapter.EXTRA_ID));
             if (SP.getString(Costants.PREFERENCES_NFC_ID, "").equals(id)) {
-                NMToggle.startAction(this, SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false) ? Costants.ACTION_NIGHT_MODE_OFF : Costants.ACTION_NIGHT_MODE_ON);
+                // TODO NMToggle.startAction(this, SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false) ? Costants.ACTION_NIGHT_MODE_OFF : Costants.ACTION_NIGHT_MODE_ON);
                 finish();
             } else {
                 final View dialogView = LayoutInflater.from(NfcReceiver.this).inflate(R.layout.dialog_line, null);

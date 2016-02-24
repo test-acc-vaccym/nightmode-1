@@ -45,10 +45,9 @@ public class Utils {
         return Build.VERSION.SDK_INT >= min && Build.VERSION.SDK_INT <= max;
     }
 
-    public static void showNotification(Context context, boolean activated) {
-        SharedPreferences SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-        if (activated && SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true)) {
-            NotificationF.NotificationAdd(context);
+    public static void showNotification(Context context, Mode m) {
+        if (m.getNotification()) {
+            NotificationF.NotificationAdd(context, m);
         } else {
             NotificationF.CancelAllNotification(context);
         }
@@ -117,7 +116,7 @@ public class Utils {
             dbHelper.deleteDirtyData();
             // Inserisco i modi principali
             // SUN
-            Mode sun = new Mode(1, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, 1, 0, "", 0, 0, 0, 0, 0, AudioManager.RINGER_MODE_NORMAL, 0, 0);
+            Mode sun = new Mode(1, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, Costants.DEFAULT_MODE_DAY, 1, 0, "", 1, 0, 0, 0, 0, AudioManager.RINGER_MODE_NORMAL, 0, 0);
             if (sun.insertDefault(dbHelper)) {
                 // NIGHT
                 Mode night = new Mode(2, Costants.DEFAULT_MODE_NIGHT, Costants.DEFAULT_MODE_NIGHT, Costants.DEFAULT_MODE_NIGHT, Costants.DEFAULT_MODE_NIGHT, 1, SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true) ? 1 : 0, SP.getString(Costants.PREFERENCES_NFC_ID, ""), SP.getBoolean(Costants.PREFERENCES_WIFI, true) ? 1 : 0, SP.getBoolean(Costants.PREFERENCES_BLUETOOTH, true) ? 1 : 0, SP.getBoolean(Costants.PREFERENCES_ALARM_SOUND, true) ? 1 : 0, SP.getInt(Costants.PREFERENCES_ALARM_SOUND_LEVEL, 5), SP.getBoolean(Costants.PREFERENCES_DO_NOT_DISTURB, true) ? 1 : 0, SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL), SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, false) ? 1 : 0, SP.getLong(Costants.PREFERENCES_START_TIME, 0));
@@ -151,5 +150,37 @@ public class Utils {
             default:
                 return 0;
         }
+    }
+
+    public static int getModeColor(String name) {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.color.primary;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.color.primary_dark;
+            default:
+                return 0;
+        }
+    }
+
+    public static Mode getActualMode(Context context) {
+        Mode actual = null;
+        SharedPreferences SP = context.getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
+        DbAdapter dbHelper = new DbAdapter(context);
+        dbHelper.open();
+
+        int n = SP.getInt(Costants.ACTUAL_MODE, 0);
+        Cursor c;
+        if (n == 0) {
+            c = dbHelper.getModeByName(Costants.DEFAULT_MODE_DAY);
+        } else {
+            c = dbHelper.getModeById(n);
+        }
+        if (c.moveToFirst())
+            actual = new Mode(c);
+        c.close();
+
+        dbHelper.close();
+        return actual;
     }
 }

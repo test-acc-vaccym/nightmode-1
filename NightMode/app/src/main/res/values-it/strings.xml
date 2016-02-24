@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Night Mode</string>
     <string name="action_disable">Disabilita la Modalità Notte</string>
-    <string name="action_disabled_night_mode">Clicca qui per disabilitare la modalità notte</string>
+    <string name="action_disabled_night_mode">Clicca qui per disabilitare la modalità %s</string>
     <string name="action_enable">Attiva la Modalità Notte</string>
     <string name="action_grant_deviceadmin">Concedi a questa applicazione di poter spegnere lo schermo come amministratore di sistema</string>
     <string name="action_pair_nfc">Appoggia il tuo telefono ad un tag nfc. Sentirai una notifica sonora o una vibrazione nel caso in cui il tag sia attivo.</string>
@@ -46,8 +46,8 @@
     <string name="action_save">Salva</string>
     <string name="action_settings">Impostazioni</string>
     <string name="add_widget">Aggiungi Widget</string>
-    <string name="app_name_disabled">Modalità Notte Disabilitata</string>
-    <string name="app_name_enabled">Modalità Notte Abilitata</string>
+    <string name="app_name_disabled">Modalità %s Disabilitata</string>
+    <string name="app_name_enabled">Modalità %s Abilitata</string>
     <string name="error_nfc_disabled">Nfc Disabilitato</string>
     <string name="start_time_disabled">Attivata l\'ultima volta %s</string>
     <string name="start_time_enabled">Attivata %s</string>

@@ -9,13 +9,15 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.nego.nightmode.Costants;
+import com.nego.nightmode.Mode;
 import com.nego.nightmode.R;
 import com.nego.nightmode.Receiver.StatusChanged;
+import com.nego.nightmode.Utils;
 
 
 public class NotificationF {
 
-    public static void NotificationAdd(Context context) {
+    public static void NotificationAdd(Context context, Mode m) {
         Intent i=new Intent(context, StatusChanged.class);
         i.setAction(Costants.ACTION_NIGHT_MODE_OFF);
         PendingIntent pi= PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -24,15 +26,15 @@ public class NotificationF {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder n  = new NotificationCompat.Builder(context)
-                .setContentTitle(context.getString(R.string.app_name_enabled))
-                .setContentText(context.getString(R.string.action_disabled_night_mode))
-                .setSmallIcon(R.drawable.ic_not_night_mode)
+                .setContentTitle(context.getString(R.string.app_name_enabled, Utils.getModeName(context, m.getName())))
+                .setContentText(context.getString(R.string.action_disabled_night_mode, Utils.getModeName(context, m.getName())))
+                .setSmallIcon(Utils.getModeIcon(m.getIcon()))
                 .setContentIntent(pi)
                 .setOngoing(true)
                 .setPriority(-1)
-                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setColor(ContextCompat.getColor(context, Utils.getModeColor(m.getColor())))
                 .setPriority(Notification.PRIORITY_MIN)
-                .setAutoCancel(false);
+                .setAutoCancel(true);
 
 
         notificationManager.notify(0, n.build());

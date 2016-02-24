@@ -4,11 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.Mode;
 import com.nego.nightmode.Utils;
+import com.nego.nightmode.database.DbAdapter;
+
+import java.util.Calendar;
 
 public class StatusChanged extends BroadcastReceiver {
 
@@ -16,11 +21,14 @@ public class StatusChanged extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(Costants.ACTION_NIGHT_MODE_OFF)) {
-            NMToggle.startAction(context, Costants.ACTION_NIGHT_MODE_OFF);
-        }
-        
-        if (intent.getAction().equals(Costants.ACTION_NIGHT_MODE_ON)) {
-            NMToggle.startAction(context, Costants.ACTION_NIGHT_MODE_ON);
+            DbAdapter dbHelper = new DbAdapter(context);
+            dbHelper.open();
+            Cursor c = dbHelper.getModeByName(Costants.DEFAULT_MODE_DAY);
+            if (c.moveToFirst()) {
+                NMToggle.startAction(context, new Mode(c));
+            }
+            c.close();
+            dbHelper.close();
         }
     }
 }
