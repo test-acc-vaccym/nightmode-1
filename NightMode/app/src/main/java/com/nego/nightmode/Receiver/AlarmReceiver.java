@@ -15,7 +15,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.i("ALARM", intent.getAction());
         if (intent.getAction().equals(Costants.ALARM_ACTION)) {
             Log.i("ALARM", intent.getStringExtra(Costants.ALARM_EXTRA_ACTION));
-            NMToggle.startAction(context, intent.getStringExtra(Costants.ALARM_EXTRA_ACTION));
+            //NMToggle.startAction(context, intent.getStringExtra(Costants.ALARM_EXTRA_ACTION));
         }
     }
 }

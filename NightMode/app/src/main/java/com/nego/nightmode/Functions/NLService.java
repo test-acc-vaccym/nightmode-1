@@ -22,6 +22,8 @@ import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
 import com.nego.nightmode.Costants;
+import com.nego.nightmode.Mode;
+import com.nego.nightmode.Utils;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class NLService extends NotificationListenerService {
@@ -62,8 +64,8 @@ public class NLService extends NotificationListenerService {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Costants.ACTION_NOTIFICATION_LISTENER_SERVICE)) {
-                SharedPreferences SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-                if (getPackageName().equals(intent.getStringExtra(Costants.NOTIFICATION_PACKAGE)) && SP.getBoolean(Costants.PREFERENCES_PRIORITY_MODE, true)) {
+                Mode actual = Utils.getActualMode(context);
+                if (getPackageName().equals(intent.getStringExtra(Costants.NOTIFICATION_PACKAGE)) && actual != null && actual.getPriority_mode()) {
                     requestInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
                 }
             }

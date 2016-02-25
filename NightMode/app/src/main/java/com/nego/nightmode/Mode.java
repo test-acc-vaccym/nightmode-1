@@ -125,7 +125,7 @@ public class Mode implements Parcelable {
     }
 
     public boolean getAlarm_sound() {
-        return alarm_sound == 1;
+        return (alarm_sound == 1);
     }
 
     public int getAlarm_soundDB() {
@@ -145,7 +145,7 @@ public class Mode implements Parcelable {
     }
 
     public boolean getBluetooth() {
-        return bluetooth == 1;
+        return (bluetooth == 1);
     }
 
     public int getBluetoothDB() {
@@ -164,8 +164,12 @@ public class Mode implements Parcelable {
         this.do_no_disturb = do_no_disturb ? 1 : 0;
     }
 
+    public void setDo_no_disturb(int do_no_disturb) {
+        this.do_no_disturb = do_no_disturb;
+    }
+
     public boolean getDo_no_disturb() {
-        return do_no_disturb == 1;
+        return (do_no_disturb == 1);
     }
 
     public int getDo_no_disturbDB() {
@@ -213,7 +217,7 @@ public class Mode implements Parcelable {
     }
 
     public boolean getNotification() {
-        return notification == 1;
+        return (notification == 1);
     }
 
     public int getNotificationDB() {
@@ -225,7 +229,7 @@ public class Mode implements Parcelable {
     }
 
     public boolean getPriority_mode() {
-        return priority_mode == 1;
+        return (priority_mode == 1);
     }
 
     public int getPriority_modeDB() {
@@ -237,7 +241,7 @@ public class Mode implements Parcelable {
     }
 
     public boolean getScreen_off() {
-        return screen_off == 1;
+        return (screen_off == 1);
     }
 
     public int getScreen_offDB() {

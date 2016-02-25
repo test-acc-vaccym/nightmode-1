@@ -32,9 +32,10 @@ public class Costants {
 
     public static final String ALARM_ACTION = "android.intent.action.ALARM";
     public static final String ALARM_EXTRA_ACTION = "android.intent.action.ALARM_EXTRA";
-    public static final String ACTION_CREATE = "android.intent.action.ACTION_CREATE";
-    public static final String ACTION_DELETE = "android.intent.action.ACTION_DELETE";
-    public static final String ALARM_EXTRA = "android.intent.extra.ALARM_EXTRA";
+    public static final String ACTION_CREATE = "android.nightmode.intent.action.ACTION_CREATE";
+    public static final String ACTION_UPDATE = "android.nightmode.intent.action.ACTION_UPDATE";
+    public static final String ACTION_DELETE = "android.nightmode.intent.action.ACTION_DELETE";
+    public static final String ALARM_EXTRA = "android.nightmode.intent.extra.ALARM_EXTRA";
 
     public static final String ACTION_NOTIFICATION_LISTENER_SERVICE = "android.intent.action.NOTIFICATION_LISTENER_SERVICE";
 

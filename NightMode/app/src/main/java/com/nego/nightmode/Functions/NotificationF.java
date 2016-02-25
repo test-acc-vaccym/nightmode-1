@@ -34,7 +34,7 @@ public class NotificationF {
                 .setPriority(-1)
                 .setColor(ContextCompat.getColor(context, Utils.getModeColor(m.getColor())))
                 .setPriority(Notification.PRIORITY_MIN)
-                .setAutoCancel(true);
+                .setAutoCancel(false);
 
 
         notificationManager.notify(0, n.build());

@@ -133,9 +133,9 @@ public class Utils {
     public static String getModeName(Context context, String name) {
         switch (name) {
             case Costants.DEFAULT_MODE_DAY:
-                return "Day";
+                return context.getString(R.string.mode_day);
             case Costants.DEFAULT_MODE_NIGHT:
-                return context.getString(R.string.app_name);
+                return context.getString(R.string.mode_night);
             default:
                 return name;
         }
@@ -146,7 +146,7 @@ public class Utils {
             case Costants.DEFAULT_MODE_DAY:
                 return R.drawable.sun;
             case Costants.DEFAULT_MODE_NIGHT:
-                return R.drawable.ic_action_night;
+                return R.drawable.moon;
             default:
                 return 0;
         }

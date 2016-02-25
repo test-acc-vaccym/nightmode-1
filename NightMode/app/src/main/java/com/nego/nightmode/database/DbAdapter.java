@@ -167,13 +167,13 @@ public class DbAdapter {
 
     public Cursor getModeById(int id) {
         return database.query(true, DATABASE_TABLE_MODE, new String[]{
-                        KEY_MODE_ID, },
+                        KEY_MODE_ID, KEY_MODE_NAME, KEY_MODE_ICON, KEY_MODE_COLOR, KEY_MODE_DEF, KEY_MODE_IS_DEFAULT, KEY_MODE_NOTIFICATION, KEY_MODE_NFC, KEY_MODE_WIFI, KEY_MODE_BLUETOOTH, KEY_MODE_ALARM_SOUND, KEY_MODE_ALARM_LEVEL, KEY_MODE_DO_NOT_DISTURB, KEY_MODE_PRIORITY_MODE, KEY_MODE_SCREEN_OFF, KEY_MODE_LAST_ACTIVATION},
                 KEY_MODE_ID + " == '" + id + "'", null, null, null, null, null);
     }
 
     public Cursor getModeByName(String name) {
         return database.query(true, DATABASE_TABLE_MODE, new String[]{
-                        KEY_MODE_ID, },
+                        KEY_MODE_ID, KEY_MODE_NAME, KEY_MODE_ICON, KEY_MODE_COLOR, KEY_MODE_DEF, KEY_MODE_IS_DEFAULT, KEY_MODE_NOTIFICATION, KEY_MODE_NFC, KEY_MODE_WIFI, KEY_MODE_BLUETOOTH, KEY_MODE_ALARM_SOUND, KEY_MODE_ALARM_LEVEL, KEY_MODE_DO_NOT_DISTURB, KEY_MODE_PRIORITY_MODE, KEY_MODE_SCREEN_OFF, KEY_MODE_LAST_ACTIVATION},
                 KEY_MODE_NAME + " == '" + name + "'", null, null, null, null, null);
     }
 

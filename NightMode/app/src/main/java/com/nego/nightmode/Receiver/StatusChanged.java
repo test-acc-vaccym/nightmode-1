@@ -29,6 +29,8 @@ public class StatusChanged extends BroadcastReceiver {
             }
             c.close();
             dbHelper.close();
+
+            Log.i("NEGO_M", "ARRIVATA NOTIFICA PER INIZIARE DAY OK");
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Night Mode</string>
-    <string name="action_disable">Disabilita la Modalità Notte</string>
+    <string name="action_disable">Disabilita</string>
     <string name="action_disabled_night_mode">Clicca qui per disabilitare la modalità %s</string>
-    <string name="action_enable">Attiva la Modalità Notte</string>
+    <string name="action_enable">Attiva</string>
     <string name="action_grant_deviceadmin">Concedi a questa applicazione di poter spegnere lo schermo come amministratore di sistema</string>
     <string name="action_pair_nfc">Appoggia il tuo telefono ad un tag nfc. Sentirai una notifica sonora o una vibrazione nel caso in cui il tag sia attivo.</string>
     <string name="warning_remove_dev">Attenzione: rimuovere i permessi di amministratore toglierà lo spegnimento automatico dello schermo</string>
@@ -78,4 +78,10 @@
     <string name="action_grant_notificationaccess">Concedi a questa applicazione l\'accesso alle notifiche per attivare la modalità priorità</string>
     <string name="active_notification">Attiva la notifica "Disattiva Modalità Notte"</string>
     <string name="subtitle_priority_preferences">Passa alla modalità priorità da quella solo allarmi quando la modalità notte è attiva</string>
+    <string name="text_error">Errore</string>
+    <string name="text_mode">Modalità %s</string>
+    <string name="mode_day">Giorno</string>
+    <string name="mode_night">Notte</string>
+    <string name="action_edit">Elimina</string>
+    <string name="action_delete">Modifica</string>
 </resources>

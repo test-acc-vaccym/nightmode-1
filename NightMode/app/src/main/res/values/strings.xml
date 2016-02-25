@@ -29,8 +29,8 @@
     <string name="start_time_disabled">Activated last time %s</string>
     <string name="start_time_enabled">Activated %s</string>
     <string name="text_never">never</string>
-    <string name="action_enable">Enable night mode</string>
-    <string name="action_disable">Disable night mode</string>
+    <string name="action_enable">Enable</string>
+    <string name="action_disable">Disable</string>
     <string name="title_activity_about">About</string>
     <string name="subtitle_about">App info, help and feedback</string>
     <string name="subtitle_settings">Manage preferences and app settings</string>
@@ -167,4 +167,10 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="text_error">Error</string>
+    <string name="text_mode">%s Mode</string>
+    <string name="mode_day">Day</string>
+    <string name="mode_night">Night</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
 </resources>

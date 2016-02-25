@@ -50,6 +50,10 @@
             android:name=".Functions.NMToggle"
             android:exported="false"></service>
 
+        <service
+            android:name=".Functions.ModeService"
+            android:exported="false"></service>
+
         <receiver android:name=".Receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
