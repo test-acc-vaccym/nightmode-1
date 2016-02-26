@@ -8,6 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -46,13 +50,31 @@ public class ProfileFragment extends Fragment {
             // BACKGROUND COLOR
             //view.findViewById(R.id.background_toolbar).setBackgroundColor(ContextCompat.getColor(getActivity(), Utils.getModeColor(m.getColor())));
 
+            View bottomSheet = view.findViewById(R.id.bottom_sheet);
+
+            final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    // React to state change
+                }
+
+                @Override
+                public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                    // React to dragging events
+                }
+            });
+            behavior.setPeekHeight((int) getResources().getDimension(R.dimen.activity_horizontal_margin) * 4);
+
             // ENABLE BUTTON
             view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    NMToggle.startAction(getActivity(), m);
+                    //NMToggle.startAction(getActivity(), m);
+                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
             });
+
         }
 
         return view;

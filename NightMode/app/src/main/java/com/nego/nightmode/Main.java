@@ -8,11 +8,16 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nego.nightmode.Adapter.ViewPagerAdapter;
+import com.nego.nightmode.Adapter.mAdapterMode;
 import com.nego.nightmode.database.DbAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -34,9 +40,8 @@ public class Main extends AppCompatActivity {
     private BroadcastReceiver mReceiver;
     private RelativeLayout background_toolbar;
 
-    private ViewPager profileList;
-    private CirclePageIndicator profileIndicator;
-    private ProgressBar loader;
+    private RecyclerView recList;
+    private BottomSheetBehavior behavior;
 
     Mode actual = null;
 
@@ -59,15 +64,34 @@ public class Main extends AppCompatActivity {
             finish();
         }
 
-        // VIEW PAGER AND INDICATOR
-        profileList = (ViewPager) findViewById(R.id.profile_list);
-        profileIndicator = (CirclePageIndicator) findViewById(R.id.profile_list_indicator);
-        profileIndicator.setFillColor(ContextCompat.getColor(this, android.R.color.white));
-        profileIndicator.setStrokeColor(ContextCompat.getColor(this, android.R.color.transparent));
-        profileIndicator.setPageColor(ContextCompat.getColor(this, R.color.white_back));
-
-        loader = (ProgressBar) findViewById(R.id.loader);
         background_toolbar = (RelativeLayout) findViewById(R.id.background_toolbar);
+
+        behavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet));
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                        getWindow().setStatusBarColor(ContextCompat.getColor(Main.this, R.color.white_dark));
+                    } else {
+                        getWindow().setStatusBarColor(ContextCompat.getColor(Main.this, R.color.primary_dark));
+                    }
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+        behavior.setPeekHeight((int) getResources().getDimension(R.dimen.activity_horizontal_margin) * 4);
+
+        // RECYCLER LIST
+        recList = (RecyclerView) findViewById(R.id.listView);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
 
         updateUI();
 
@@ -96,9 +120,8 @@ public class Main extends AppCompatActivity {
     }
 
     public void updateUI() {
-        profileList.animate().alpha(0).start();
-        loader.setVisibility(View.VISIBLE);
-
+        //behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        /*
         background_toolbar.animate()
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .alpha(0)
@@ -140,27 +163,20 @@ public class Main extends AppCompatActivity {
                     }
                 }).start();
 
-
+*/
         final Handler mHandler = new Handler();
 
         new Thread(new Runnable() {
             public void run() {
                 DbAdapter dbHelper = new DbAdapter(Main.this);
                 dbHelper.open();
-
-                final ViewPagerAdapter mAdapterP = new ViewPagerAdapter(getSupportFragmentManager());
-                Cursor c = dbHelper.fetchAllModes();
-                while (c.moveToNext())
-                    mAdapterP.addFrag(new Mode(c));
-                c.close();
+                final mAdapterMode mAdapterMode = new mAdapterMode(dbHelper, Main.this);
                 dbHelper.close();
 
                 mHandler.post(new Runnable() {
                     public void run() {
-                        loader.setVisibility(View.GONE);
-                        profileList.animate().alpha(1).start();
-                        profileList.setAdapter(mAdapterP);
-                        profileIndicator.setViewPager(profileList);
+                        recList.setAdapter(mAdapterMode);
+                        //behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 });
             }

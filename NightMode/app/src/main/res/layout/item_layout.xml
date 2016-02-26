@@ -2,80 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/back_selected_item" />
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
         android:id="@+id/item"
-        android:paddingBottom="32dp"
         android:background="@android:color/transparent"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardPreventCornerOverlap="true">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clickable="true"
+            android:gravity="center_vertical"
             android:id="@+id/background_toolbar"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
-                    android:padding="8dp"
-                    android:id="@+id/icon"
-                    android:src="@drawable/sun"
-                    android:layout_margin="16dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_margin="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="Title"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="32sp"
-                        android:id="@+id/title"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2w"
-                        android:textColor="@color/white_back"
-                        android:fontFamily="sans-serif-light"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/last_activation"/>
-                </LinearLayout>
-            </LinearLayout>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
+                android:id="@+id/icon"
+                android:src="@drawable/sun"
+                android:background="@drawable/circle"
+                android:layout_margin="16dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@android:color/white"
-                android:id="@+id/background_button"
-                android:orientation="horizontal"
-                android:layout_margin="16dp">
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="?android:attr/actionBarSize"
-                    android:textAppearance="?android:attr/textAppearanceButton"
-                    android:text="@string/action_enable"
-                    android:gravity="center"
-                    android:background="?attr/selectableItemBackground"
-                    android:padding="16dp"
-                    android:id="@+id/button"
-                    android:textColor="@color/all_text"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/all_text"
+                    android:text="Title"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    android:id="@+id/title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2w"
+                    android:textColor="@color/secondary_text"
+                    android:fontFamily="sans-serif-light"
+                    android:id="@+id/last_activation"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

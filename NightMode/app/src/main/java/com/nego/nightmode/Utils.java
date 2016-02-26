@@ -183,4 +183,24 @@ public class Utils {
         dbHelper.close();
         return actual;
     }
+
+
+    public static String getModeLastActivation (Context context, long date) {
+        if (date == 0) {
+            return context.getString(R.string.text_never);
+        } else {
+            long difference = (Calendar.getInstance().getTimeInMillis() - date) / 1000;
+            if (difference < 60) { // Secondi
+                return difference + context.getString(R.string.seconds);
+            } else if (difference >= 60 && difference < 3600) { // Minuti
+                return difference / 60 + context.getString(R.string.minutes);
+            } else if (difference >= (60 * 60) && difference < (60*60*24)) { // Ore
+                return difference / (60 * 60) + context.getString(R.string.hours);
+            } else if (difference >= (60*60*24) && difference < (60*60*24*7)) { // Giorni
+                return difference / (60*60*24) + context.getString(R.string.days);
+            } else { // Settimane
+                return difference / (60*60*24*7) + context.getString(R.string.weeks);
+            }
+        }
+    }
 }

@@ -84,4 +84,10 @@
     <string name="mode_night">Notte</string>
     <string name="action_edit">Elimina</string>
     <string name="action_delete">Modifica</string>
+    <string name="days">g</string>
+    <string name="hours">o</string>
+    <string name="minutes">m</string>
+    <string name="title_activity_scrolling"></string>
+    <string name="seconds">s</string>
+    <string name="weeks">set</string>
 </resources>
