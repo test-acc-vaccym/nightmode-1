@@ -1,6 +1,7 @@
 package com.nego.nightmode;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -108,7 +109,29 @@ public class Mode implements Parcelable {
         this.icon = icon;
     }
 
-    public String getIcon() {
+    public int getIcon() {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.drawable.sun;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.drawable.moon;
+            default:
+                return 0;
+        }
+    }
+
+    public int getSmallIcon() {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.drawable.ic_action_brightness;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.drawable.ic_action_night;
+            default:
+                return 0;
+        }
+    }
+
+    public String getIconDB() {
         return icon;
     }
 
@@ -116,7 +139,29 @@ public class Mode implements Parcelable {
         this.color = color;
     }
 
-    public String getColor() {
+    public int getColor() {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.color.primary;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.color.primary_dark;
+            default:
+                return 0;
+        }
+    }
+
+    public int getDarkColor() {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.color.primary_dark;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.color.night_dark;
+            default:
+                return 0;
+        }
+    }
+
+    public String getColorDB() {
         return color;
     }
 
@@ -160,6 +205,10 @@ public class Mode implements Parcelable {
         return def;
     }
 
+    public String getDefDB() {
+        return def;
+    }
+
     public void setDo_no_disturb(boolean do_no_disturb) {
         this.do_no_disturb = do_no_disturb ? 1 : 0;
     }
@@ -200,7 +249,18 @@ public class Mode implements Parcelable {
         this.name = name;
     }
 
-    public String getName() {
+    public String getName(Context context) {
+        switch (name) {
+            case Costants.DEFAULT_MODE_DAY:
+                return context.getString(R.string.mode_day);
+            case Costants.DEFAULT_MODE_NIGHT:
+                return context.getString(R.string.mode_night);
+            default:
+                return name;
+        }
+    }
+
+    public String getNameDB() {
         return name;
     }
 
@@ -275,6 +335,10 @@ public class Mode implements Parcelable {
     public boolean delete(DbAdapter dbAdapter) {
         return dbAdapter.deleteMode(id);
     }
+
+    public boolean isDayMode() {
+        return name.equals(Costants.DEFAULT_MODE_DAY);
+    };
 
 
     // PARCELIZZAZIONE

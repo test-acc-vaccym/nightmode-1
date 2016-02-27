@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,9 +40,15 @@ public class Main extends AppCompatActivity {
     private SharedPreferences SP;
     private BroadcastReceiver mReceiver;
     private RelativeLayout background_toolbar;
+    private RelativeLayout support_background;
+
+    private mAdapterMode mAdapterMode;
 
     private RecyclerView recList;
     private BottomSheetBehavior behavior;
+    private TextView name;
+    private TextView time;
+    private ImageView icon;
 
     Mode actual = null;
 
@@ -58,6 +65,7 @@ public class Main extends AppCompatActivity {
             // TODO start Tutorial update
         }
 
+        // MAIN ACTIVITY
         actual = Utils.getActualMode(this);
         if (actual == null) {
             Toast.makeText(this, getString(R.string.text_error), Toast.LENGTH_SHORT).show();
@@ -65,26 +73,39 @@ public class Main extends AppCompatActivity {
         }
 
         background_toolbar = (RelativeLayout) findViewById(R.id.background_toolbar);
+        support_background = (RelativeLayout) findViewById(R.id.support_background);
+        name = (TextView) findViewById(R.id.name);
+        time = (TextView) findViewById(R.id.time);
+        icon = (ImageView) findViewById(R.id.icon);
 
+        // BOTTOM SHEET
         behavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet));
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        getWindow().setStatusBarColor(ContextCompat.getColor(Main.this, R.color.white_dark));
-                    } else {
-                        getWindow().setStatusBarColor(ContextCompat.getColor(Main.this, R.color.primary_dark));
-                    }
-                }
+                updateStatusBar();
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
             }
         });
-        behavior.setPeekHeight((int) getResources().getDimension(R.dimen.activity_horizontal_margin) * 4);
+
+
+        // OPEN/CLOSE FUNCTIONS
+        findViewById(R.id.action_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                collapseBS();
+            }
+        });
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
 
         // RECYCLER LIST
         recList = (RecyclerView) findViewById(R.id.listView);
@@ -119,9 +140,21 @@ public class Main extends AppCompatActivity {
         super.onPause();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED)
+            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        else
+            super.onBackPressed();
+    }
+
+    public void updateStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(Main.this, actual.getDarkColor()));
+        }
+    }
+
     public void updateUI() {
-        //behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        /*
         background_toolbar.animate()
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .alpha(0)
@@ -133,23 +166,38 @@ public class Main extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        name.setText(getString(R.string.text_mode, actual.getName(Main.this)));
+                        time.setText(getString(R.string.start_time_enabled, Utils.getDate(Main.this, actual.getLast_activation())));
+                        icon.setImageDrawable(ContextCompat.getDrawable(Main.this, actual.getIcon()));
 
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                            int cx = background_toolbar.getWidth() / 2;
-                            int cy = background_toolbar.getHeight() / 2;
-                            int finalRadius = Math.max(background_toolbar.getWidth(), background_toolbar.getHeight());
-                            Animator anim =
-                                    ViewAnimationUtils.createCircularReveal(background_toolbar, cx, cy, 0, finalRadius);
+                        background_toolbar.setBackgroundColor(ContextCompat.getColor(Main.this, actual.getColor()));
+                        background_toolbar
+                                .animate()
+                                .alpha(1)
+                                .setInterpolator(new AccelerateDecelerateInterpolator())
+                                .setListener(new Animator.AnimatorListener() {
+                                    @Override
+                                    public void onAnimationStart(Animator animation) {
 
-                            background_toolbar.setBackgroundColor(ContextCompat.getColor(Main.this, Utils.getModeColor(actual.getColor())));
-                            background_toolbar.setAlpha(1);
-                            anim.setInterpolator(new AccelerateDecelerateInterpolator());
-                            anim.setDuration(500);
-                            anim.start();
-                        } else {
-                            background_toolbar.setBackgroundColor(ContextCompat.getColor(Main.this, Utils.getModeColor(actual.getColor())));
-                            background_toolbar.setAlpha(1);
-                        }
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        support_background.setBackgroundColor(ContextCompat.getColor(Main.this, actual.getColor()));
+                                        updateStatusBar();
+                                    }
+
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animator animation) {
+
+                                    }
+                                })
+                                .start();
                     }
 
                     @Override
@@ -163,23 +211,24 @@ public class Main extends AppCompatActivity {
                     }
                 }).start();
 
-*/
         final Handler mHandler = new Handler();
 
         new Thread(new Runnable() {
             public void run() {
                 DbAdapter dbHelper = new DbAdapter(Main.this);
                 dbHelper.open();
-                final mAdapterMode mAdapterMode = new mAdapterMode(dbHelper, Main.this);
+                mAdapterMode = new mAdapterMode(dbHelper, Main.this);
                 dbHelper.close();
-
                 mHandler.post(new Runnable() {
                     public void run() {
                         recList.setAdapter(mAdapterMode);
-                        //behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 });
             }
         }).start();
+    }
+
+    public void collapseBS() {
+        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 }

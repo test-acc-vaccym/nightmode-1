@@ -1,10 +1,12 @@
 package com.nego.nightmode.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nego.nightmode.Costants;
 import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.Main;
 import com.nego.nightmode.Mode;
 import com.nego.nightmode.R;
 import com.nego.nightmode.Utils;
@@ -39,13 +43,15 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
         public TextView title;
         public TextView last_activation;
         public ImageView icon;
-        public ViewHolder(View v, CardView item, TextView title, TextView last_activation, ImageView icon) {
+        public LinearLayout background;
+        public ViewHolder(View v, CardView item, TextView title, TextView last_activation, ImageView icon, LinearLayout background) {
             super(v);
             mView = v;
             this.item = item;
             this.title = title;
             this.last_activation = last_activation;
             this.icon = icon;
+            this.background = background;
         }
 
     }
@@ -68,7 +74,8 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
                 (CardView) v.findViewById(R.id.item),
                 (TextView) v.findViewById(R.id.title),
                 (TextView) v.findViewById(R.id.last_activation),
-                (ImageView) v.findViewById(R.id.icon));
+                (ImageView) v.findViewById(R.id.icon),
+                (LinearLayout) v.findViewById(R.id.background_toolbar));
 
         return vh;
     }
@@ -77,13 +84,18 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Mode m = mDataset.get(position);
 
-        holder.title.setText(Utils.getModeName(mContext, m.getName()));
-        holder.last_activation.setText(Utils.getModeLastActivation(mContext, m.getLast_activation()));
-        holder.icon.setImageResource(Utils.getModeIcon(m.getIcon()));
+        // TITLE
+        holder.title.setText(m.getName(mContext));
 
-        holder.item.setOnClickListener(new View.OnClickListener() {
+        // LAST ACTIVATION
+        holder.last_activation.setText(mContext.getString(R.string.start_time_enabled, Utils.getDate(mContext, m.getLast_activation())));
+        holder.icon.setImageResource(m.getIcon());
+        holder.background.setBackgroundColor(ContextCompat.getColor(mContext, m.getColor()));
+
+        holder.background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((Main) mContext).collapseBS();
                 NMToggle.startAction(mContext, m);
             }
         });
@@ -98,8 +110,9 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
     public void generate_list(DbAdapter dbHelper) {
         mDataset.clear();
         Cursor c = dbHelper.fetchAllModes();
-        while (c.moveToNext())
+        while (c.moveToNext()) {
             mDataset.add(new Mode(c));
+        }
         c.close();
     }
 }

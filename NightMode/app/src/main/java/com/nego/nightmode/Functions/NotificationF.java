@@ -26,18 +26,18 @@ public class NotificationF {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder n  = new NotificationCompat.Builder(context)
-                .setContentTitle(context.getString(R.string.app_name_enabled, Utils.getModeName(context, m.getName())))
-                .setContentText(context.getString(R.string.action_disabled_night_mode, Utils.getModeName(context, m.getName())))
-                .setSmallIcon(Utils.getModeIcon(m.getIcon()))
+                .setContentTitle(context.getString(R.string.app_name_enabled, m.getName(context)))
+                .setContentText(context.getString(R.string.action_disabled_night_mode,m.getName(context)))
+                .setSmallIcon(m.getSmallIcon())
                 .setContentIntent(pi)
                 .setOngoing(true)
                 .setPriority(-1)
-                .setColor(ContextCompat.getColor(context, Utils.getModeColor(m.getColor())))
+                .setColor(ContextCompat.getColor(context, m.getColor()))
                 .setPriority(Notification.PRIORITY_MIN)
                 .setAutoCancel(false);
 
 
-        notificationManager.notify(0, n.build());
+        notificationManager.notify(m.getId(), n.build());
     }
 
     public static void CancelAllNotification(Context context) {

@@ -48,4 +48,6 @@
 
     <color name="ripple_dark">#42ffffff</color>
     <color name="ripple_light">#1f000000</color>
+
+    <color name="night_dark">#22447c</color>
 </resources>

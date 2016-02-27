@@ -46,5 +46,6 @@ public class Costants {
 
     public static final String MODE_EXTRA = "MODE_EXTRA";
     public static final String ACTUAL_MODE = "ACTUAL_MODE";
+    public static final String SEND_RESPONSE_EXTRA = "SEND_RESPONSE_EXTRA";
 
 }

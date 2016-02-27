@@ -143,17 +143,17 @@ public class DbAdapter {
 
 
     public long createMode(Mode m) {
-        ContentValues initialValues = createModeValues(m.getName(), m.getIcon(), m.getColor(), m.getDef(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
+        ContentValues initialValues = createModeValues(m.getNameDB(), m.getIconDB(), m.getColorDB(), m.getDefDB(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
         return database.insertOrThrow(DATABASE_TABLE_MODE, null, initialValues);
     }
 
     public long createDefaultMode(Mode m) {
-        ContentValues initialValues = createModeValues(m.getId(), m.getName(), m.getIcon(), m.getColor(), m.getDef(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
+        ContentValues initialValues = createModeValues(m.getId(), m.getNameDB(), m.getIconDB(), m.getColorDB(), m.getDefDB(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
         return database.insertOrThrow(DATABASE_TABLE_MODE, null, initialValues);
     }
 
     public boolean updateMode(Mode m) {
-        ContentValues updateValues = createModeValues(m.getId(), m.getName(), m.getIcon(), m.getColor(), m.getDef(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
+        ContentValues updateValues = createModeValues(m.getId(), m.getNameDB(), m.getIconDB(), m.getColorDB(), m.getDefDB(), m.getIsDefaultDB(), m.getNotificationDB(), m.getNfc(), m.getWifiDB(), m.getBluetoothDB(), m.getAlarm_soundDB(), m.getAlarm_level(), m.getDo_no_disturbDB(), m.getPriority_modeDB(), m.getScreen_offDB(), m.getLast_activation());
         return database.update(DATABASE_TABLE_MODE, updateValues, KEY_MODE_ID + "==" + m.getId(), null) > 0;
     }
 

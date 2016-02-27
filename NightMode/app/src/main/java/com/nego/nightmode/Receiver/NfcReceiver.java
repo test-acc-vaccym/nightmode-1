@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.Mode;
 import com.nego.nightmode.R;
 import com.nego.nightmode.Utils;
 
@@ -33,15 +34,13 @@ public class NfcReceiver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("NFC", "OK");
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
         NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
         mNfcAdapter = manager.getDefaultAdapter();
 
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(getIntent().getAction())) {
-            Log.i("NFC", "TECH");
             String id = Utils.ByteArrayToHexString(getIntent().getByteArrayExtra(NfcAdapter.EXTRA_ID));
-            if (SP.getString(Costants.PREFERENCES_NFC_ID, "").equals(id)) {
+            if (true /* ESISTE UN PROFILO CON QUESTO TAG? */) {
                 // TODO NMToggle.startAction(this, SP.getBoolean(Costants.PREFERENCES_NIGHT_MODE_ACTIVE, false) ? Costants.ACTION_NIGHT_MODE_OFF : Costants.ACTION_NIGHT_MODE_ON);
                 finish();
             } else {
@@ -81,6 +80,7 @@ public class NfcReceiver extends AppCompatActivity {
                 dialog_nfc.show();
             }
         } else if (getIntent().getAction().equals(Costants.ACTION_PAIR_NFC)) {
+            // PAIR TAG NFC
             final View dialogView = LayoutInflater.from(NfcReceiver.this).inflate(R.layout.dialog_line, null);
             dialog_nfc = new Dialog(NfcReceiver.this, R.style.mDialog);
             final TextView tag_id = (TextView) dialogView.findViewById(R.id.nfc_id);

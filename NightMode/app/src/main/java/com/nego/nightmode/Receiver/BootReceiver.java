@@ -24,6 +24,7 @@ public class BootReceiver extends BroadcastReceiver {
             Utils.updateToMode(context, SP);
             Utils.showNotification(context, Utils.getActualMode(context));
 
+            // TODO ALARMS
             DbAdapter dbHelper = new DbAdapter(context);
             dbHelper.open();
             Cursor c = dbHelper.fetchAllAlarms();

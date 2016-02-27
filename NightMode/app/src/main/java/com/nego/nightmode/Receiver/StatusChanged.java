@@ -21,16 +21,7 @@ public class StatusChanged extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(Costants.ACTION_NIGHT_MODE_OFF)) {
-            DbAdapter dbHelper = new DbAdapter(context);
-            dbHelper.open();
-            Cursor c = dbHelper.getModeByName(Costants.DEFAULT_MODE_DAY);
-            if (c.moveToFirst()) {
-                NMToggle.startAction(context, new Mode(c));
-            }
-            c.close();
-            dbHelper.close();
-
-            Log.i("NEGO_M", "ARRIVATA NOTIFICA PER INIZIARE DAY OK");
+            NMToggle.startAction(context, Utils.getDayMode(context));
         }
     }
 }

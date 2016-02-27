@@ -45,22 +45,6 @@ public class Settings extends AppCompatActivity {
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
 
-        // REMEMBER OLD
-        final CheckBox oC = (CheckBox) findViewById(R.id.remember_old_check);
-        oC.setChecked(SP.getBoolean(Costants.PREFERENCES_REMEMBER_OLD, true));
-        oC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SP.edit().putBoolean(Costants.PREFERENCES_REMEMBER_OLD, isChecked).apply();
-            }
-        });
-        findViewById(R.id.action_remember_old).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oC.setChecked(!oC.isChecked());
-            }
-        });
-
         // NOTIFICATION
         final CheckBox notC = (CheckBox) findViewById(R.id.notification_check);
         notC.setChecked(SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true));

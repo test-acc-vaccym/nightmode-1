@@ -90,4 +90,6 @@
     <string name="title_activity_scrolling"></string>
     <string name="seconds">s</string>
     <string name="weeks">set</string>
+    <string name="action_change_mode">Cambia Modalità</string>
+    <string name="action_choose_mode">Scegli Modalità</string>
 </resources>

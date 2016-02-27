@@ -38,14 +38,6 @@ public class ProfileFragment extends Fragment {
         final Mode m = getArguments().getParcelable(Costants.MODE_EXTRA);
 
         if (m != null) {
-            // TITLE
-            ((TextView) view.findViewById(R.id.title)).setText(getString(R.string.text_mode, Utils.getModeName(getActivity(), m.getName())));
-            // LAST ACTIVATION
-            ((TextView) view.findViewById(R.id.last_activation)).setText(Utils.getDate(getActivity(), m.getLast_activation()));
-            // DEF
-            //((TextView) view.findViewById(R.id.definition)).setText(m.getDef());
-            //ICON
-            ((ImageView) view.findViewById(R.id.icon)).setImageResource(Utils.getModeIcon(m.getIcon()));
 
             // BACKGROUND COLOR
             //view.findViewById(R.id.background_toolbar).setBackgroundColor(ContextCompat.getColor(getActivity(), Utils.getModeColor(m.getColor())));

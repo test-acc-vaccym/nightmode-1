@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.Functions.NMToggle;
+import com.nego.nightmode.Main;
 import com.nego.nightmode.R;
 
 public class ShortcutReceiver extends Activity {
@@ -14,6 +15,7 @@ public class ShortcutReceiver extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         if (getIntent().getAction().equals("android.intent.action.CREATE_SHORTCUT")) {
+            // TODO Creare scorciatoie diverse in base a quale vuole
             Intent shortcutIntent = new Intent(getApplicationContext(), ShortcutReceiver.class);
             shortcutIntent.setAction(Costants.ACTION_NIGHT_MODE_OFF);
             shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

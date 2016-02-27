@@ -178,4 +178,6 @@
     <string name="hours">h</string>
     <string name="days">d</string>
     <string name="weeks">w</string>
+    <string name="action_change_mode">Change Mode</string>
+    <string name="action_choose_mode">Choose Mode</string>
 </resources>

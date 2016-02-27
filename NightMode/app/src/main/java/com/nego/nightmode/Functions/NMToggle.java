@@ -19,6 +19,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nego.nightmode.Costants;
 import com.nego.nightmode.Mode;
@@ -52,32 +53,25 @@ public class NMToggle extends IntentService {
         if (intent != null && intent.getAction().equals(Costants.ACTION_NIGHT_MODE_TOGGLE)) {
             Mode m = intent.getParcelableExtra(Costants.MODE_EXTRA);
 
-            Log.i("NEGO_M", m.getName());
-
             SharedPreferences SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
-            SP.edit().putInt(Costants.ACTUAL_MODE, m.getId()).apply();
+            SP.edit().putInt(Costants.ACTUAL_MODE, m.getId()).commit();
 
             // UPDATE MODE LAST ACTIVATION
-            DbAdapter dbHelper = new DbAdapter(this);
-            dbHelper.open();
             m.setLast_activation(Calendar.getInstance().getTimeInMillis());
-            m.update(dbHelper);
+            ModeService.startAction(this, Costants.ACTION_UPDATE, m, false);
 
             // GET DAY MODE
-            Cursor c = dbHelper.getModeByName(Costants.DEFAULT_MODE_DAY);
-            Mode day = null;
-            if (c.moveToFirst())
-                day = new Mode(c);
-            c.close();
-
-            dbHelper.close();
+            Mode day = Utils.getDayMode(this);
+            if (day == null) {
+                Toast.makeText(this, getString(R.string.text_error), Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             //WIFI
             WifiManager wm = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-            if (!m.getName().equals(Costants.DEFAULT_MODE_DAY)) {
+            if (!m.isDayMode()) {
+                day.setWifi(wm.isWifiEnabled());
                 if (m.getWifi()) {
-                    if (day != null)
-                        day.setWifi(wm.isWifiEnabled());
                     wm.setWifiEnabled(false);
                 }
             } else {
@@ -86,10 +80,9 @@ public class NMToggle extends IntentService {
 
             // BLUETOOTH
             BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (!m.getName().equals(Costants.DEFAULT_MODE_DAY)) {
+            if (!m.isDayMode()) {
+                day.setBluetooth(mBluetoothAdapter.isEnabled());
                 if (m.getBluetooth()) {
-                    if (day != null)
-                        day.setBluetooth(mBluetoothAdapter.isEnabled());
                     mBluetoothAdapter.disable();
                 }
             } else {
@@ -99,45 +92,41 @@ public class NMToggle extends IntentService {
                     mBluetoothAdapter.disable();
             }
 
-            Log.i("NEGO_M", "BLUETOOTH OK");
-
             // ALARM VOLUME
             AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            if (!m.getName().equals(Costants.DEFAULT_MODE_DAY)) {
+            if (!m.isDayMode()) {
+                day.setAlarm_level(am.getStreamVolume(AudioManager.STREAM_ALARM));
                 if (m.getAlarm_sound()) {
-                    if (day != null) {
-                        day.setAlarm_level(am.getStreamVolume(AudioManager.STREAM_ALARM));
-                    }
+                    day.setAlarm_sound(true);
                     am.setStreamVolume(AudioManager.STREAM_ALARM, m.getAlarm_level(), 0);
+                } else {
+                    day.setAlarm_sound(false);
                 }
             } else {
-                am.setStreamVolume(AudioManager.STREAM_ALARM, m.getAlarm_level(), 0);
+                if (day.getAlarm_sound())
+                    am.setStreamVolume(AudioManager.STREAM_ALARM, m.getAlarm_level(), 0);
             }
-
-            Log.i("NEGO_M", "ALARM VOLUME OK");
 
             // DO NOT DISTURB
-            if (!m.getName().equals(Costants.DEFAULT_MODE_DAY)) {
+            if (!m.isDayMode()) {
+                SP.edit().putInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, am.getRingerMode()).apply();
                 if (m.getDo_no_disturb()) {
-                    if (day != null)
-                        day.setDo_no_disturb(AudioManager.RINGER_MODE_NORMAL);
+                    day.setDo_no_disturb(true);
                     am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                } else {
+                    day.setDo_no_disturb(false);
                 }
             } else {
-                am.setRingerMode(m.getDo_no_disturbDB());
+                if (m.getDo_no_disturb())
+                    am.setRingerMode(SP.getInt(Costants.PREFERENCES_DO_NOT_DISTURB_OLD, AudioManager.RINGER_MODE_NORMAL));
             }
-
-            Log.i("NEGO_M", "DO NOT DISTURB " + m.getDo_no_disturbDB());
 
             //UPDATE UI
             Utils.showNotification(this, m);
-            Utils.updateWidget(this);
+            Utils.updateWidget(this); // TODO Widget
 
-            if (!m.getName().equals(Costants.DEFAULT_MODE_DAY)) {
-                ModeService.startAction(this, Costants.ACTION_UPDATE, day);
-            } else {
-                sendResponse(Costants.ACTION_NIGHT_MODE_TOGGLE);
-            }
+            ModeService.startAction(this, Costants.ACTION_UPDATE, day, false);
+            sendResponse(Costants.ACTION_NIGHT_MODE_TOGGLE);
 
             // SCREEN OFF
             if (m.getScreen_off()) {
