@@ -49,6 +49,8 @@ public class Utils {
         if (m.getNotification()) {
             NotificationF.NotificationAdd(context, m);
         } else {
+            if (m.getPriority_mode())
+                NotificationF.NotificationAdd(context, m);
             NotificationF.CancelAllNotification(context);
         }
     }
@@ -114,7 +116,9 @@ public class Utils {
             dbHelper.open();
             // Ripulisco eventuali dati sporchi
             dbHelper.deleteDirtyData();
+
             // Inserisco i modi principali
+
             // SUN
             Mode sun = new Mode(1, // ID
                     Costants.DEFAULT_MODE_DAY, // NOME
@@ -132,32 +136,92 @@ public class Utils {
                     0, // PRIORITY_MODE
                     0, // SCREEN_OFF
                     Calendar.getInstance().getTimeInMillis()); // LAST ACTIVATION
-            if (sun.insertDefault(dbHelper)) {
-                // NIGHT
-                Mode night = new Mode(2,
-                        Costants.DEFAULT_MODE_NIGHT,
-                        Costants.DEFAULT_MODE_NIGHT,
-                        Costants.DEFAULT_MODE_NIGHT,
-                        Costants.DEFAULT_MODE_NIGHT,
-                        1,
-                        SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true) ? 1 : 0,
-                        SP.getString(Costants.PREFERENCES_NFC_ID, ""),
-                        SP.getBoolean(Costants.PREFERENCES_WIFI, true) ? 1 : 0,
-                        SP.getBoolean(Costants.PREFERENCES_BLUETOOTH, true) ? 1 : 0,
-                        SP.getBoolean(Costants.PREFERENCES_ALARM_SOUND, true) ? 1 : 0,
-                        SP.getInt(Costants.PREFERENCES_ALARM_SOUND_LEVEL, 5),
-                        SP.getBoolean(Costants.PREFERENCES_DO_NOT_DISTURB, true) ? 1 : 0,
-                        SP.getBoolean(Costants.PREFERENCES_PRIORITY_MODE, true) ? 1 : 0,
-                        SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, false) ? 1 : 0,
-                        SP.getLong(Costants.PREFERENCES_START_TIME, 0));
-                if (!night.insertDefault(dbHelper))
-                    return false;
-            } else
-                return false;
+
+            // NIGHT
+            Mode night = new Mode(2,
+                    Costants.DEFAULT_MODE_NIGHT,
+                    Costants.DEFAULT_MODE_NIGHT,
+                    Costants.DEFAULT_MODE_NIGHT,
+                    Costants.DEFAULT_MODE_NIGHT,
+                    1,
+                    SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true) ? 1 : 0,
+                    SP.getString(Costants.PREFERENCES_NFC_ID, ""),
+                    SP.getBoolean(Costants.PREFERENCES_WIFI, true) ? 1 : 0,
+                    SP.getBoolean(Costants.PREFERENCES_BLUETOOTH, true) ? 1 : 0,
+                    SP.getBoolean(Costants.PREFERENCES_ALARM_SOUND, true) ? 1 : 0,
+                    SP.getInt(Costants.PREFERENCES_ALARM_SOUND_LEVEL, 5),
+                    SP.getBoolean(Costants.PREFERENCES_DO_NOT_DISTURB, true) ? 1 : 0,
+                    SP.getBoolean(Costants.PREFERENCES_PRIORITY_MODE, true) ? 1 : 0,
+                    SP.getBoolean(Costants.PREFERENCES_SCREEN_OFF, false) ? 1 : 0,
+                    SP.getLong(Costants.PREFERENCES_START_TIME, 0));
+
+            // CHARGING
+            Mode charging = new Mode(3, // ID
+                    Costants.DEFAULT_MODE_CHARGING, // NOME
+                    Costants.DEFAULT_MODE_CHARGING, // ICON
+                    Costants.DEFAULT_MODE_CHARGING, // COLOR
+                    Costants.DEFAULT_MODE_CHARGING, // DEF
+                    1, // DEFAULT
+                    1, // NOTIFICATION
+                    "", // NFC
+                    1, // WIFI
+                    1, // BLUETOOTH
+                    0, // ALARM_SOUND
+                    0, // ALARM_LEVEL
+                    0, // DO NOT DISTURB
+                    0, // PRIORITY_MODE
+                    0, // SCREEN_OFF
+                    0); // LAST ACTIVATION
+
+            // OUTDOOR
+            Mode outdoor = new Mode(4, // ID
+                    Costants.DEFAULT_MODE_OUTDOOR, // NOME
+                    Costants.DEFAULT_MODE_OUTDOOR, // ICON
+                    Costants.DEFAULT_MODE_OUTDOOR, // COLOR
+                    Costants.DEFAULT_MODE_OUTDOOR, // DEF
+                    1, // DEFAULT
+                    1, // NOTIFICATION
+                    "", // NFC
+                    0, // WIFI
+                    0, // BLUETOOTH
+                    0, // ALARM_SOUND
+                    0, // ALARM_LEVEL
+                    0, // DO NOT DISTURB
+                    0, // PRIORITY_MODE
+                    0, // SCREEN_OFF
+                    0); // LAST ACTIVATION
+
+            // MEETING
+            Mode meeting = new Mode(5, // ID
+                    Costants.DEFAULT_MODE_MEETING, // NOME
+                    Costants.DEFAULT_MODE_MEETING, // ICON
+                    Costants.DEFAULT_MODE_MEETING, // COLOR
+                    Costants.DEFAULT_MODE_MEETING, // DEF
+                    1, // DEFAULT
+                    1, // NOTIFICATION
+                    "", // NFC
+                    0, // WIFI
+                    0, // BLUETOOTH
+                    1, // ALARM_SOUND
+                    0, // ALARM_LEVEL
+                    1, // DO NOT DISTURB
+                    1, // PRIORITY_MODE
+                    0, // SCREEN_OFF
+                    0); // LAST ACTIVATION
+
+
+            boolean insert_ok = false;
+            if (sun.insertDefault(dbHelper) &&
+                    night.insertDefault(dbHelper) &&
+                    charging.insertDefault(dbHelper) &&
+                    outdoor.insertDefault(dbHelper) &&
+                    meeting.insertDefault(dbHelper))
+                insert_ok = true;
+
             dbHelper.close();
 
             // NEXT CYCLE
-            if (SP.edit().putInt(Costants.UPDATED_TO_MODE, 1).commit())
+            if (insert_ok && SP.edit().putInt(Costants.UPDATED_TO_MODE, 1).commit())
                 updateToMode(context, SP);
             else
                 return false;

@@ -180,4 +180,7 @@
     <string name="weeks">w</string>
     <string name="action_change_mode">Change Mode</string>
     <string name="action_choose_mode">Choose Mode</string>
+    <string name="mode_charging">Charging</string>
+    <string name="mode_outdoor">Outdoor</string>
+    <string name="mode_meeting">Meeting</string>
 </resources>

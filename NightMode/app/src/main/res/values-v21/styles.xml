@@ -25,7 +25,6 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:actionModeBackground">@color/primary</item>
-        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat</item>
     </style>
 
     <style name="MyDialog_theme" parent="Theme.AppCompat.Light.NoActionBar">

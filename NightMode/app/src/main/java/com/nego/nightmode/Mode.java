@@ -110,22 +110,51 @@ public class Mode implements Parcelable {
     }
 
     public int getIcon() {
-        switch (name) {
+        switch (icon) {
             case Costants.DEFAULT_MODE_DAY:
-                return R.drawable.sun;
+                return R.drawable.ic_action_brightness_high;
             case Costants.DEFAULT_MODE_NIGHT:
-                return R.drawable.moon;
+                return R.drawable.ic_action_night;
+            case Costants.DEFAULT_MODE_CHARGING:
+                return R.drawable.ic_action_charging;
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return R.drawable.ic_action_nature;
+            case Costants.DEFAULT_MODE_MEETING:
+                return R.drawable.ic_action_meeting;
             default:
                 return 0;
         }
     }
 
     public int getSmallIcon() {
-        switch (name) {
+        switch (icon) {
             case Costants.DEFAULT_MODE_DAY:
-                return R.drawable.ic_action_brightness;
+                return R.drawable.ic_stat_brightness;
             case Costants.DEFAULT_MODE_NIGHT:
                 return R.drawable.ic_action_night;
+            case Costants.DEFAULT_MODE_CHARGING:
+                return R.drawable.ic_stat_charging;
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return R.drawable.ic_stat_nature;
+            case Costants.DEFAULT_MODE_MEETING:
+                return R.drawable.ic_stat_meeting;
+            default:
+                return 0;
+        }
+    }
+
+    public int getBigIcon() {
+        switch (icon) {
+            case Costants.DEFAULT_MODE_DAY:
+                return R.drawable.sun;
+            case Costants.DEFAULT_MODE_NIGHT:
+                return R.drawable.moon;
+            case Costants.DEFAULT_MODE_CHARGING:
+                return R.drawable.charging;
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return R.drawable.ic_stat_nature;
+            case Costants.DEFAULT_MODE_MEETING:
+                return R.drawable.ic_stat_meeting;
             default:
                 return 0;
         }
@@ -140,22 +169,34 @@ public class Mode implements Parcelable {
     }
 
     public int getColor() {
-        switch (name) {
+        switch (color) {
             case Costants.DEFAULT_MODE_DAY:
                 return R.color.primary;
             case Costants.DEFAULT_MODE_NIGHT:
                 return R.color.primary_dark;
+            case Costants.DEFAULT_MODE_CHARGING:
+                return R.color.charging;
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return R.color.outdoor;
+            case Costants.DEFAULT_MODE_MEETING:
+                return R.color.meeting;
             default:
                 return 0;
         }
     }
 
     public int getDarkColor() {
-        switch (name) {
+        switch (color) {
             case Costants.DEFAULT_MODE_DAY:
                 return R.color.primary_dark;
             case Costants.DEFAULT_MODE_NIGHT:
                 return R.color.night_dark;
+            case Costants.DEFAULT_MODE_CHARGING:
+                return R.color.charging_dark;
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return R.color.outdoor_dark;
+            case Costants.DEFAULT_MODE_MEETING:
+                return R.color.meeting_dark;
             default:
                 return 0;
         }
@@ -201,8 +242,21 @@ public class Mode implements Parcelable {
         this.def = def;
     }
 
-    public String getDef() {
-        return def;
+    public String getDef(Context context) {
+        switch (def) {
+            case Costants.DEFAULT_MODE_DAY:
+                return context.getString(R.string.mode_day);
+            case Costants.DEFAULT_MODE_NIGHT:
+                return context.getString(R.string.mode_night);
+            case Costants.DEFAULT_MODE_CHARGING:
+                return context.getString(R.string.mode_charging);
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return context.getString(R.string.mode_outdoor);
+            case Costants.DEFAULT_MODE_MEETING:
+                return context.getString(R.string.mode_meeting);
+            default:
+                return name;
+        }
     }
 
     public String getDefDB() {
@@ -255,6 +309,12 @@ public class Mode implements Parcelable {
                 return context.getString(R.string.mode_day);
             case Costants.DEFAULT_MODE_NIGHT:
                 return context.getString(R.string.mode_night);
+            case Costants.DEFAULT_MODE_CHARGING:
+                return context.getString(R.string.mode_charging);
+            case Costants.DEFAULT_MODE_OUTDOOR:
+                return context.getString(R.string.mode_outdoor);
+            case Costants.DEFAULT_MODE_MEETING:
+                return context.getString(R.string.mode_meeting);
             default:
                 return name;
         }

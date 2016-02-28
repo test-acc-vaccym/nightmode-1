@@ -45,22 +45,6 @@ public class Settings extends AppCompatActivity {
 
         SP = getSharedPreferences(Costants.PREFERENCES_COSTANT, Context.MODE_PRIVATE);
 
-        // NOTIFICATION
-        final CheckBox notC = (CheckBox) findViewById(R.id.notification_check);
-        notC.setChecked(SP.getBoolean(Costants.PREFERENCES_NOTIFICATION, true));
-        notC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SP.edit().putBoolean(Costants.PREFERENCES_NOTIFICATION, isChecked).apply();
-            }
-        });
-        findViewById(R.id.action_notification).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                notC.setChecked(!notC.isChecked());
-            }
-        });
-
         // AUTOMATIC RULES
         findViewById(R.id.action_auto).setOnClickListener(new View.OnClickListener() {
             @Override

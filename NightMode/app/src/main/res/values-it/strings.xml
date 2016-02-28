@@ -92,4 +92,7 @@
     <string name="weeks">set</string>
     <string name="action_change_mode">Cambia Modalità</string>
     <string name="action_choose_mode">Scegli Modalità</string>
+    <string name="mode_charging">Ricarica</string>
+    <string name="mode_outdoor">All\'aperto</string>
+    <string name="mode_meeting">Occupato</string>
 </resources>

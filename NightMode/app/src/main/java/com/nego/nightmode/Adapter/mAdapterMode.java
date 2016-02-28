@@ -43,8 +43,10 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
         public TextView title;
         public TextView last_activation;
         public ImageView icon;
-        public LinearLayout background;
-        public ViewHolder(View v, CardView item, TextView title, TextView last_activation, ImageView icon, LinearLayout background) {
+        public ImageView background;
+        public LinearLayout item_to_click;
+        public ImageView action_info;
+        public ViewHolder(View v, CardView item, TextView title, TextView last_activation, ImageView icon, ImageView background, LinearLayout item_to_click, ImageView action_info) {
             super(v);
             mView = v;
             this.item = item;
@@ -52,6 +54,8 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
             this.last_activation = last_activation;
             this.icon = icon;
             this.background = background;
+            this.item_to_click = item_to_click;
+            this.action_info = action_info;
         }
 
     }
@@ -75,7 +79,9 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
                 (TextView) v.findViewById(R.id.title),
                 (TextView) v.findViewById(R.id.last_activation),
                 (ImageView) v.findViewById(R.id.icon),
-                (LinearLayout) v.findViewById(R.id.background_toolbar));
+                (ImageView) v.findViewById(R.id.background_toolbar),
+                (LinearLayout) v.findViewById(R.id.item_to_click),
+                (ImageView) v.findViewById(R.id.action_info));
 
         return vh;
     }
@@ -90,15 +96,27 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
         // LAST ACTIVATION
         holder.last_activation.setText(mContext.getString(R.string.start_time_enabled, Utils.getDate(mContext, m.getLast_activation())));
         holder.icon.setImageResource(m.getIcon());
-        holder.background.setBackgroundColor(ContextCompat.getColor(mContext, m.getColor()));
+        holder.background.setColorFilter(ContextCompat.getColor(mContext, m.getColor()));
 
-        holder.background.setOnClickListener(new View.OnClickListener() {
+        holder.item_to_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((Main) mContext).collapseBS();
                 NMToggle.startAction(mContext, m);
             }
         });
+
+        if (m.isDayMode()) {
+            holder.action_info.setVisibility(View.GONE);
+        } else {
+            holder.action_info.setVisibility(View.VISIBLE);
+            holder.action_info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((Main) mContext).collapseBS();
+                }
+            });
+        }
     }
 
     @Override

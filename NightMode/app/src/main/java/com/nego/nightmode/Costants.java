@@ -42,7 +42,9 @@ public class Costants {
     public static final String UPDATED_TO_MODE = "UPDATED_TO_MODE";
     public static final String DEFAULT_MODE_DAY = "DEFAULT_MODE_DAY";
     public static final String DEFAULT_MODE_NIGHT = "DEFAULT_MODE_NIGHT";
-    public static final String DEFAULT_MODE_CHARGE = "DEFAULT_MODE_CHARGE";
+    public static final String DEFAULT_MODE_CHARGING = "DEFAULT_MODE_CHARGING";
+    public static final String DEFAULT_MODE_OUTDOOR = "DEFAULT_MODE_OUTDOOR";
+    public static final String DEFAULT_MODE_MEETING = "DEFAULT_MODE_MEETING";
 
     public static final String MODE_EXTRA = "MODE_EXTRA";
     public static final String ACTUAL_MODE = "ACTUAL_MODE";
