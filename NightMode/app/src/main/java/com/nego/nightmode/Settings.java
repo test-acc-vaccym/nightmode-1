@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
@@ -50,6 +51,24 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, Rules.class));
+            }
+        });
+
+        // VERSION
+        String version = "";
+        try {
+            version = getString(R.string.text_version, getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        } catch (Exception e) {
+            version = getString(R.string.error_version_not_found);
+        } finally {
+            ((TextView) findViewById(R.id.subtitle_versione)).setText(version);
+        }
+
+        // COMMUNITY
+        findViewById(R.id.action_community).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/u/0/communities/100614116200820350356/stream/9bc2ab8b-45f2-40ed-822f-0e7439009a62")));
             }
         });
 

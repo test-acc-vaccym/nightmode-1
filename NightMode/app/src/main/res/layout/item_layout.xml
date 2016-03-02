@@ -4,55 +4,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:id="@+id/top_divider"
+        android:orientation="horizontal"
+        android:visibility="gone"/>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="1dp"
         android:id="@+id/item"
         android:background="@android:color/transparent"
         app:cardBackgroundColor="@android:color/transparent"
-        app:cardPreventCornerOverlap="true">
+        app:cardPreventCornerOverlap="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:clickable="true"
+            android:background="@color/primary"
             android:id="@+id/item_to_click"
-            android:background="@android:color/white"
             android:foreground="?attr/selectableItemBackground"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
-            <RelativeLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:layout_margin="12dp">
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/background_toolbar"
-                    android:src="@drawable/circle"
-                    android:layout_centerInParent="true"/>
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="8dp"
-                    android:id="@+id/icon"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_action_night" />
-            </RelativeLayout>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
+                android:id="@+id/icon"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_action_night"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
                 android:orientation="vertical"
-                android:layout_margin="8dp">
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="20dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/all_text"
+                    android:textColor="@android:color/white"
                     android:text="Title"
                     android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -62,21 +62,20 @@
                     android:layout_height="wrap_content"
                     android:text="2w"
                     android:singleLine="true"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@android:color/white"
                     android:fontFamily="sans-serif-light"
-                    android:id="@+id/last_activation"/>
+                    android:id="@+id/last_activation"
+                    android:alpha="0.6"/>
             </LinearLayout>
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:padding="8dp"
-                android:id="@+id/action_info"
-                android:clickable="true"
-                android:tint="@color/secondary_text"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_action_info_outline"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp" />
+                android:id="@+id/action_info"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_action_info_outline" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
     <LinearLayout

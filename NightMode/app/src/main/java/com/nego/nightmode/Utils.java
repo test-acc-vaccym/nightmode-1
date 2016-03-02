@@ -110,6 +110,7 @@ public class Utils {
     }
 
     public static boolean updateToMode(Context context, SharedPreferences SP) {
+        //SP.edit().putInt(Costants.UPDATED_TO_MODE, 0).commit();
         if (SP.getInt(Costants.UPDATED_TO_MODE, 0) == 0) {
             // Apro il db così da creare la tabella mode
             DbAdapter dbHelper = new DbAdapter(context);
@@ -173,26 +174,8 @@ public class Utils {
                     0, // SCREEN_OFF
                     0); // LAST ACTIVATION
 
-            // OUTDOOR
-            Mode outdoor = new Mode(4, // ID
-                    Costants.DEFAULT_MODE_OUTDOOR, // NOME
-                    Costants.DEFAULT_MODE_OUTDOOR, // ICON
-                    Costants.DEFAULT_MODE_OUTDOOR, // COLOR
-                    Costants.DEFAULT_MODE_OUTDOOR, // DEF
-                    1, // DEFAULT
-                    1, // NOTIFICATION
-                    "", // NFC
-                    0, // WIFI
-                    0, // BLUETOOTH
-                    0, // ALARM_SOUND
-                    0, // ALARM_LEVEL
-                    0, // DO NOT DISTURB
-                    0, // PRIORITY_MODE
-                    0, // SCREEN_OFF
-                    0); // LAST ACTIVATION
-
             // MEETING
-            Mode meeting = new Mode(5, // ID
+            Mode meeting = new Mode(4, // ID
                     Costants.DEFAULT_MODE_MEETING, // NOME
                     Costants.DEFAULT_MODE_MEETING, // ICON
                     Costants.DEFAULT_MODE_MEETING, // COLOR
@@ -206,6 +189,24 @@ public class Utils {
                     0, // ALARM_LEVEL
                     1, // DO NOT DISTURB
                     1, // PRIORITY_MODE
+                    0, // SCREEN_OFF
+                    0); // LAST ACTIVATION
+
+            // OUTDOOR
+            Mode outdoor = new Mode(5, // ID
+                    Costants.DEFAULT_MODE_OUTDOOR, // NOME
+                    Costants.DEFAULT_MODE_OUTDOOR, // ICON
+                    Costants.DEFAULT_MODE_OUTDOOR, // COLOR
+                    Costants.DEFAULT_MODE_OUTDOOR, // DEF
+                    1, // DEFAULT
+                    1, // NOTIFICATION
+                    "", // NFC
+                    0, // WIFI
+                    0, // BLUETOOTH
+                    0, // ALARM_SOUND
+                    0, // ALARM_LEVEL
+                    0, // DO NOT DISTURB
+                    0, // PRIORITY_MODE
                     0, // SCREEN_OFF
                     0); // LAST ACTIVATION
 

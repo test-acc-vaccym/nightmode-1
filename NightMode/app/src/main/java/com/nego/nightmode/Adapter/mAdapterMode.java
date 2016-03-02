@@ -39,21 +39,21 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
             mView = v;
         }
 
+        public LinearLayout top_divider;
         public CardView item;
         public TextView title;
         public TextView last_activation;
         public ImageView icon;
-        public ImageView background;
         public LinearLayout item_to_click;
         public ImageView action_info;
-        public ViewHolder(View v, CardView item, TextView title, TextView last_activation, ImageView icon, ImageView background, LinearLayout item_to_click, ImageView action_info) {
+        public ViewHolder(View v, LinearLayout top_divider, CardView item, TextView title, TextView last_activation, ImageView icon, LinearLayout item_to_click, ImageView action_info) {
             super(v);
             mView = v;
+            this.top_divider = top_divider;
             this.item = item;
             this.title = title;
             this.last_activation = last_activation;
             this.icon = icon;
-            this.background = background;
             this.item_to_click = item_to_click;
             this.action_info = action_info;
         }
@@ -75,11 +75,11 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
         v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_layout, parent, false);
         vh = new ViewHolder(v,
+                (LinearLayout) v.findViewById(R.id.top_divider),
                 (CardView) v.findViewById(R.id.item),
                 (TextView) v.findViewById(R.id.title),
                 (TextView) v.findViewById(R.id.last_activation),
                 (ImageView) v.findViewById(R.id.icon),
-                (ImageView) v.findViewById(R.id.background_toolbar),
                 (LinearLayout) v.findViewById(R.id.item_to_click),
                 (ImageView) v.findViewById(R.id.action_info));
 
@@ -90,13 +90,19 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Mode m = mDataset.get(position);
 
+        if (position == 0) {
+            holder.top_divider.setVisibility(View.VISIBLE);
+        } else {
+            holder.top_divider.setVisibility(View.GONE);
+        }
+
         // TITLE
         holder.title.setText(m.getName(mContext));
 
         // LAST ACTIVATION
         holder.last_activation.setText(mContext.getString(R.string.start_time_enabled, Utils.getDate(mContext, m.getLast_activation())));
         holder.icon.setImageResource(m.getIcon());
-        holder.background.setColorFilter(ContextCompat.getColor(mContext, m.getColor()));
+        holder.item_to_click.setBackgroundColor(ContextCompat.getColor(mContext, m.getColor()));
 
         holder.item_to_click.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,17 +112,12 @@ public class mAdapterMode extends RecyclerView.Adapter<mAdapterMode.ViewHolder> 
             }
         });
 
-        if (m.isDayMode()) {
-            holder.action_info.setVisibility(View.GONE);
-        } else {
-            holder.action_info.setVisibility(View.VISIBLE);
-            holder.action_info.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((Main) mContext).collapseBS();
-                }
-            });
-        }
+        holder.action_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Main) mContext).collapseBS();
+            }
+        });
     }
 
     @Override

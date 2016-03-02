@@ -49,8 +49,8 @@
     <color name="ripple_light">#1f000000</color>
 
     <color name="night_dark">#22447c</color>
-    <color name="charging">#c23434</color><!--db4337-->
-    <color name="charging_dark">#9b2a2a</color><!--af362c-->
+    <color name="charging">#db4337</color><!--c23434-->
+    <color name="charging_dark">#af362c</color><!--9b2a2a-->
     <color name="outdoor">#5d974e</color> <!--19a15f-->
     <color name="outdoor_dark">#4a793e</color><!--12804b-->
     <color name="meeting">#f5be25</color>
