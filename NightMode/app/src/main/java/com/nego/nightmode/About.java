@@ -23,7 +23,7 @@ public class About extends AppCompatActivity {
         // VERSIONE
         String version = "";
         try {
-            version = getString(R.string.text_version) + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            version = getString(R.string.text_version, getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
         } catch (Exception e) {
             version = " not found";
         }
