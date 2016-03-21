@@ -111,6 +111,8 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //behavior.setPeekHeight(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) * 4);
+
         // RECYCLER LIST
         recList = (RecyclerView) findViewById(R.id.listView);
         recList.setHasFixedSize(true);

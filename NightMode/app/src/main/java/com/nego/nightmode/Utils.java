@@ -46,6 +46,7 @@ public class Utils {
     }
 
     public static void showNotification(Context context, Mode m) {
+        NotificationF.CancelAllNotification(context);
         if (m.getNotification()) {
             NotificationF.NotificationAdd(context, m);
         } else {
@@ -264,7 +265,7 @@ public class Utils {
     }
 
 
-    public static String getModeLastActivation (Context context, long date) {
+    public static String getModeLastActivation(Context context, long date) {
         if (date == 0) {
             return context.getString(R.string.text_never);
         } else {
